@@ -1,0 +1,17 @@
+.start-journey{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(220, 125, 31, 1);
+    color: white;
+    padding: 80px;
+}
+.start-journey-wrapper{
+    width: 70%;
+}
+.start-journey button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    height: min-content;
+}
