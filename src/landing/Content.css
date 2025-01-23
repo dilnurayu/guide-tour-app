@@ -2,17 +2,23 @@
     background: linear-gradient(to bottom, white, rgba(220, 125, 31, 1));
     padding: 20px 160px;
 }
-.top-guides{
-    width: 100%;
-    display: flex;
-    gap: 20px;
+.top-guides {
+  width: 100%;
+  display: flex;
+  gap: 20px; 
+  justify-content: space-around; 
+  align-items: center; 
+  flex-wrap: wrap; 
 }
 
-.guides-container .top-guides img{
-    width: 25%;
-    height: 100%;
-    border-radius: 20px;
+.top-guides img {
+  width: 100%; 
+  max-width: calc(25% - 20px); 
+  height: auto;
+  border-radius: 10px; 
+  object-fit: cover; 
 }
+
 .guides-container .top-destinations{
     margin-top: 20px;
 }
