@@ -11,6 +11,8 @@ import StartJourney from "./guide/StartJourney";
 import ToursList from "./tour/ToursList";
 import GuideDetails from "./guide/GuideDetails";
 import ScrollToTop from "./ScrollToTop";
+import GuideTours from "./guide/GuideTours";
+import GuideReviews from "./guide/GuideReviews";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           element={
             <>
               <GuideDetails />
+              <GuideTours />
+              <GuideReviews />
             </>
           }
         />

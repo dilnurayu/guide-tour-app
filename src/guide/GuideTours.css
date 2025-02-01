@@ -1,0 +1,51 @@
+.guide-tours {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.line {
+  background-color: gainsboro;
+  height: 1px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.guide-tours p {
+  color: grey;
+}
+.guide-tours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px auto;
+}
+.rating {
+  margin: 0;
+  padding: 0;
+}
+
+.guide-tour-container {
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+}
+
+.guide-tour-container button {
+  margin: auto 0;
+  width: fit-content;
+  height: 55px;
+  background-color: #ff7b1a;
+  color: white;
+  border: none;
+  padding: 12px 55px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.guide-tour-container button:hover {
+  background-color: #e96a00;
+}

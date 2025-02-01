@@ -5,7 +5,7 @@ import image from "../assets/guide-details/image.png";
 import image1 from "../assets/guide-details/image-1.png";
 import image2 from "../assets/guide-details/image-2.png";
 
-const ProfilePage = () => {
+const GuideDetails = () => {
   return (
     <>
       <div className="profile-container">
@@ -122,4 +122,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default GuideDetails;
