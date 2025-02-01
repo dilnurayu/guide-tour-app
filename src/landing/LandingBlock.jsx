@@ -8,8 +8,10 @@ const LandingBlock = () => {
   return (
     <div className="landing-block">
       <div className="content">
-        <div className="text">
-          <img src={home}/>
+        <div className="text-wrapper">
+          <div className="text">
+            <img src={home}/> 
+          </div>  
         </div>
         <div className="image">
           <img src={image} alt="Landing" />

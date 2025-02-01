@@ -3,6 +3,7 @@ import './GuidesList.css';
 import { FaRegClock, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import guidePerson from '../assets/guide-person.png';
 import { CiFilter } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 
 const guides = [
   { id: 1, name: "John Doe", duration: "2 Days 2 Nights", price: "$13.00/per hour", rating: 4.5 },
@@ -36,20 +37,20 @@ const GuidesList = () => {
     <div className="guides-list-container">
       <div className='guide-wrapper'>
         <h2>Results {guides.length}</h2>
-        <h3><CiFilter/> Advanced Filter</h3>
+        <h3><CiFilter /> Advanced Filter</h3>
       </div>
       <ul className="guides-list">
         {guides.map((guide) => (
-          <li key={guide.id} className="guide-item">
-            <img src={guidePerson}/>
-            <div className="rating">
-              {renderStars(guide.rating)}
-            </div>
-            <h3>{guide.name}</h3>
-            <p><FaRegClock /> {guide.duration}</p>
-            <p>Price: {guide.price}</p>
-            <button>Book this guide</button>
-          </li>
+          <Link to={`/guides/${guide.id}`} key={guide.id} className="guide-item-link">
+            <li className="guide-item">
+              <img src={guidePerson} alt={guide.name} />
+              <div className="rating">{renderStars(guide.rating)}</div>
+              <h3>{guide.name}</h3>
+              <p><FaRegClock /> {guide.duration}</p>
+              <p>Price: {guide.price}</p>
+              <button>Book this guide</button>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>

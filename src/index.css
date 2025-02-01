@@ -4,6 +4,10 @@ body{
   font-family: 'Poppins';
 }
 
+html, body {
+  overflow-x: hidden; 
+}
+
 @font-face {
   font-family: 'Poppins';
   src: local('Poppins'), url(./assets/font/Poppins/Poppins-Regular.ttf) format('truetype');

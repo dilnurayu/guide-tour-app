@@ -18,7 +18,8 @@ const Header = () => {
   return (
     <>
       <header className="header">
-        <div className="logo">
+        <div className='header-wrapper'>
+          <div className="logo">
           <Link to="/">
             <img src={logo} alt="Logo" />
           </Link>
@@ -34,6 +35,7 @@ const Header = () => {
         <div className="auth">
           <a href="#login" onClick={() => openModal('login')}>Login</a>
           <a href="#register" onClick={() => openModal('register')}>Register</a>
+        </div>
         </div>
       </header>
 

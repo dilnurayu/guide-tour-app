@@ -1,0 +1,159 @@
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  margin-top: 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.about-container {
+  margin: 0 auto;
+  display: flex;
+}
+
+.right-section {
+  width: 30%;
+  text-align: center;
+}
+
+.left-section {
+  width: 70%;
+}
+
+.right-section-wrapper {
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.left-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 20px;
+}
+.left-section-wrapper h2 {
+  margin-bottom: 10px;
+}
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profile-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.rating {
+  margin-bottom: 10px;
+}
+
+.star {
+  color: gold;
+  font-size: 20px;
+}
+
+.experience-date {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.short-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.languages-list,
+.regions-list {
+  display: flex;
+}
+.languages-list p,
+.regions-list p {
+  display: inline;
+}
+
+.languages-list p:not(:last-child)::after,
+.regions-list p:not(:last-child)::after {
+  content: ", ";
+}
+
+.languages-list p,
+.regions-list p {
+  display: inline;
+  margin-right: 5px;
+}
+
+.about-text {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.photo-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.bottom-profile-wrapper {
+  display: flex;
+}
+.profile-gallery {
+  width: 70%;
+}
+
+.profile-gallery-wrapper {
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.book-guide {
+  width: 30%;
+  text-align: center;
+  border-radius: 20px;
+  background-color: gainsboro;
+  margin-top: 30px;
+  height: fit-content;
+}
+.book-guide-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px;
+}
+
+.book-guide-wrapper p {
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.book-guide-wrapper input {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.book-guide-wrapper button {
+  margin: 20px auto 0 auto;
+  width: fit-content;
+  height: 50px;
+  background-color: #ff7b1a;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.book-guide-wrapper button:hover {
+  background-color: #e96a00;
+}
