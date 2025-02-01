@@ -1,3 +1,7 @@
+h4 {
+  padding: 0;
+  margin: 0;
+}
 .guide-reviews {
   max-width: 1200px;
   margin: 20px auto;
@@ -10,4 +14,41 @@
   border-radius: 20px;
   width: -webkit-fill-available;
   height: 100px;
+}
+
+.rate-comment {
+  display: flex;
+  justify-content: space-between;
+}
+.rate-comment button {
+  margin: auto 0;
+  width: fit-content;
+  height: 40px;
+  background-color: #ff7b1a;
+  color: white;
+  border: none;
+  padding: 12px 55px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.rate-comment button:hover {
+  background-color: #e96a00;
+}
+.reviews-list {
+  margin-top: 20px;
+}
+.reviews-container {
+  padding: 20px;
+  display: flex;
+}
+
+.reviews-container img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  margin-right: 20px;
 }
