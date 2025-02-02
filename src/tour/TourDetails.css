@@ -1,0 +1,132 @@
+h1 {
+  padding: 0;
+  margin: 0;
+}
+h5 {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  color: gray;
+}
+
+.tour-details {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.tour-details-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tour-details .tour-about .rating {
+  font-size: 14px;
+  color: gray;
+}
+.tour-about {
+  width: 70%;
+}
+.tour-about-wrapper {
+  padding-right: 40px;
+}
+.tour-about ul {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.tour-about ul li {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.tour-about ul li p {
+  color: #e96a00;
+  font-weight: bold;
+  width: 33%;
+}
+.tour-about ul li span {
+  width: 50%;
+}
+
+.tour-about-button-wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.tour-about-button-wrapper button {
+  width: fit-content;
+  height: 45px;
+  background-color: #ff7b1a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tour-about-button-wrapper button:hover {
+  background-color: #e96a00;
+}
+
+.book-tour {
+  width: 30%;
+  text-align: center;
+  border-radius: 20px;
+  background-color: gainsboro;
+  margin-top: 30px;
+  height: fit-content;
+}
+.book-tour-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px;
+}
+
+.book-tour-wrapper p {
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.book-tour-wrapper input {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.book-tour-wrapper button {
+  margin: 20px auto 0 auto;
+  width: fit-content;
+  height: 50px;
+  background-color: #ff7b1a;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.book-tour-wrapper button:hover {
+  background-color: #e96a00;
+}
+
+.tour-gallery p {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+.tour-gallery-photos {
+  gap: 10px;
+  display: flex;
+}
+.tour-gallery-photos img {
+  width: -webkit-fill-available;
+}

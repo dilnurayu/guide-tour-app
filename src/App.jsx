@@ -6,13 +6,15 @@ import Header from "./skeleton/Header";
 import Content from "./landing/Content";
 import LandingBlock from "./landing/LandingBlock";
 import GuidesList from "./guide/GuidesList";
-import SearchSection from "./guide/SearchSection";
 import StartJourney from "./guide/StartJourney";
 import ToursList from "./tour/ToursList";
 import GuideDetails from "./guide/GuideDetails";
 import ScrollToTop from "./ScrollToTop";
 import GuideTours from "./guide/GuideTours";
 import GuideReviews from "./guide/GuideReviews";
+import TourSearch from "./tour/TourSearch";
+import GuideSearch from "./guide/GuideSearch";
+import TourDetails from "./tour/TourDetails";
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
           path="/guides"
           element={
             <>
-              <SearchSection />
+              <GuideSearch />
               <GuidesList />
               <StartJourney />
             </>
@@ -50,10 +52,19 @@ function App() {
           }
         />
         <Route
+          path="/destinations/:id"
+          element={
+            <>
+              <TourDetails />
+              <GuideReviews />
+            </>
+          }
+        />
+        <Route
           path="/destinations"
           element={
             <>
-              <SearchSection />
+              <TourSearch />
               <ToursList />
             </>
           }
