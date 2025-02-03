@@ -1,0 +1,92 @@
+.profile {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile h1 {
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 30%;
+}
+.profile-content {
+  display: flex;
+}
+
+.profile-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  gap: 20px;
+}
+.profile-image-wrapper img {
+  border-radius: 100%;
+}
+
+.profile-image-wrapper .edit,
+.profile-image-wrapper .delete {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.profile-image-wrapper .edit {
+  border: 1px black solid;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+}
+
+.profile-image-wrapper .delete {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background-color: #ff7b1a;
+  font-size: 16px;
+  color: white;
+}
+
+.profile-details {
+  width: 70%;
+}
+
+.profile-details-wrapper {
+  padding-left: 40px;
+}
+
+.profile-details-wrapper ul {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.profile-details-wrapper ul li {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.profile-details-wrapper ul li p {
+  font-weight: bold;
+  width: 25%;
+}
+.profile-details-wrapper ul li span {
+  width: 50%;
+}
+.profile-details-wrapper ul li span input {
+  border: gray 0.5px solid;
+  border-radius: 15px;
+  padding: 8px 10px;
+  width: 100%;
+}
+.profile-details-wrapper ul li span button {
+  text-align: center;
+  padding: 8px 25px;
+  border: gray 0.5px solid;
+  background-color: white;
+  border-radius: 15px;
+  color: gray;
+}
