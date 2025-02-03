@@ -71,10 +71,10 @@
 }
 .profile-details-wrapper ul li p {
   font-weight: bold;
-  width: 25%;
+  width: 30%;
 }
 .profile-details-wrapper ul li span {
-  width: 50%;
+  width: 70%;
 }
 .profile-details-wrapper ul li span input {
   border: gray 0.5px solid;
@@ -89,4 +89,16 @@
   background-color: white;
   border-radius: 15px;
   color: gray;
+}
+.right-save-button {
+  display: flex;
+  justify-content: end;
+}
+.right-save-button button {
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  background-color: #ff7b1a;
+  font-size: 16px;
+  color: white;
 }

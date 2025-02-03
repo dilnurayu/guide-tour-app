@@ -75,6 +75,9 @@ const Profile = () => {
                   </span>
                 </li>
               </ul>
+              <div className="right-save-button">
+                <button>Save</button>
+              </div>
             </div>
           </div>
         </div>

@@ -108,11 +108,11 @@ const Header = () => {
                   <div className="user-type-select">
                     <div className="guest">
                       <p>Tourists:</p>
-                      <input type="checkbox" name="role" value="tourist" />
+                      <input type="radio" name="role" value="tourist" />
                     </div>
                     <div className="guide">
                       <p>Guide:</p>
-                      <input type="checkbox" name="role" value="guide" />
+                      <input type="radio" name="role" value="guide" />
                     </div>
                   </div>
                 </form>
@@ -129,11 +129,11 @@ const Header = () => {
                   <div className="user-type-select">
                     <div className="guest">
                       <p>Tourists:</p>
-                      <input type="checkbox" name="role" value="tourist" />
+                      <input type="radio" name="role" value="tourist" />
                     </div>
                     <div className="guide">
                       <p>Guide:</p>
-                      <input type="checkbox" name="role" value="guide" />
+                      <input type="radio" name="role" value="guide" />
                     </div>
                   </div>
                 </form>

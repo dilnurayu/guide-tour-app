@@ -72,9 +72,9 @@ function AppRoutes() {
           </>
         }
       />
-      <Route path="/profile" element={<Profile />} />
       {user && user.role === "guide" && (
         <>
+          <Route path="/profile" element={<Profile />} />
           <Route path="/guide-tours" element={<GuideTours />} />
           {/* <Route path="/my-reviews" element={
             // <MyReviews />

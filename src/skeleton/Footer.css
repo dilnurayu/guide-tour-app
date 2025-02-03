@@ -47,9 +47,10 @@ button {
   line-height: normal;
 }
 
-.footer-overlay h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+.footer-overlay img {
+  margin: 0 auto;
+  width: 500px;
+  margin-bottom: 40px;
 }
 
 .footer-input {
@@ -94,6 +95,9 @@ button {
 .footer-right {
   width: 40%;
 }
+.footer-right {
+  display: flex;
+}
 
 .footer-left h3,
 .footer-right h3 {
@@ -130,4 +134,18 @@ button {
   font-size: 0.9rem;
   line-height: normal;
   background: transparent;
+}
+.footer-right .footer-socials ul {
+  gap: 20px;
+  display: flex;
+}
+.footer-right img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+.footer-right .footer-socials ul li img {
+  width: 20px;
+}
+.footer-socials ul {
+  display: flex;
 }
