@@ -52,7 +52,7 @@
 .modal-container {
   max-height: 80vh;
   overflow-y: auto;
-  width: 60%;
+  width: 40%;
 }
 .modal-container form {
   display: flex;
