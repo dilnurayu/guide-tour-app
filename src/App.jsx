@@ -20,6 +20,7 @@ import GuideTours from "./guide-tour/GuideToursList";
 // import MyReviews from "./guide/MyReviews"; // Component for guide's own reviews
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
+import GuideToursList from "./guide-tour/GuideToursList";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -76,7 +77,7 @@ function AppRoutes() {
       {user && user.role === "guide" && (
         <>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/guide-tours" element={<GuideTours />} />
+          <Route path="/guide-tours" element={<GuideToursList />} />
           <Route path="/guide-reviews" element={<GuideReviewList />} />
         </>
       )}
