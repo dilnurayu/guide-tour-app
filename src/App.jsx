@@ -16,9 +16,10 @@ import TourSearch from "./tour/TourSearch";
 import GuideSearch from "./guide/GuideSearch";
 import TourDetails from "./tour/TourDetails";
 import Profile from "./profile/Profile";
-import GuideTours from "./guide-tour/GuideTours";
+import GuideTours from "./guide-tour/GuideToursList";
 // import MyReviews from "./guide/MyReviews"; // Component for guide's own reviews
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
+import GuideReviewList from "./guide-review/GuideReviewList";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -76,9 +77,7 @@ function AppRoutes() {
         <>
           <Route path="/profile" element={<Profile />} />
           <Route path="/guide-tours" element={<GuideTours />} />
-          {/* <Route path="/my-reviews" element={
-            // <MyReviews />
-          } /> */}
+          <Route path="/guide-reviews" element={<GuideReviewList />} />
         </>
       )}
     </Routes>
