@@ -28,7 +28,8 @@
 }
 
 .profile-image-wrapper .edit,
-.profile-image-wrapper .delete {
+.profile-image-wrapper .delete,
+.profile-image-wrapper .logout {
   width: 75%;
   margin: 0 auto;
 }
@@ -48,6 +49,14 @@
   background-color: #ff7b1a;
   font-size: 16px;
   color: white;
+}
+.profile-image-wrapper .logout {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background-color: rgb(255, 34, 34);
+  color: white;
+  font-size: 16px;
 }
 
 .profile-details {

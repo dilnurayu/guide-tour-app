@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import guidePerson from "../assets/guide-person.png";
+import { AuthContext } from "../auth/AuthContext";
 import "./Profile.css";
-
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
   return (
     <>
       <div className="profile">
@@ -12,6 +21,9 @@ const Profile = () => {
               <img src={guidePerson} />
               <button className="edit">Edit</button>
               <button className="delete">Delete</button>
+              <button className="logout" onClick={handleLogout}>
+                Logout
+              </button>
             </div>
           </div>
           <div className="profile-details">

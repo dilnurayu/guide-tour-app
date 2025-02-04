@@ -1,39 +1,146 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { AuthContext } from "../auth/AuthContext";
 import "./Header.css";
 import "./Modal.css";
 import logo from "../assets/UzGuide.png";
-import { CgProfile } from "react-icons/cg";
-import { AuthContext } from "../auth/AuthContext";
+import "./AuthComponents";
+import AuthForm from "./AuthComponents";
+
+const INITIAL_FORM_STATE = {
+  name: "",
+  email: "",
+  password: "",
+  address: "",
+  user_type: "",
+};
+
+const API_BASE_URL = "https://guide-tour-api.vercel.app/auth";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-
   const [activeModal, setActiveModal] = useState(null);
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleAuth = async (endpoint, data) => {
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseData = await response.json();
+    if (!response.ok) {
+      throw new Error(responseData.message || `${endpoint} failed`);
+    }
+    return responseData;
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const { email, password } = formData;
+      const data = await handleAuth("signin", { email, password });
+
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("userType", formData.user_type);
+
+      setUser({
+        role: formData.user_type,
+        token: data.token,
+      });
+
+      closeModal();
+      navigate("/profile");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const data = await handleAuth("signup", formData);
+
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("userType", formData.user_type);
+
+      setUser({
+        role: formData.user_type,
+        token: loginData.access_token,
+      });
+
+      closeModal();
+      navigate("/profile");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const openModal = (type) => {
     setActiveModal(type);
+    setError("");
+    setFormData(INITIAL_FORM_STATE);
   };
 
   const closeModal = () => {
     setActiveModal(null);
+    setError("");
   };
 
-  // For demonstration, when the form is submitted,
-  // we simulate login by setting a user with role "guide"
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // In a real app, determine the role based on form inputs
-    setUser({ role: "guide", name: "Guide User" });
-    closeModal();
-  };
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    // For demonstration, we assume registration as a guide
-    setUser({ role: "guide", name: "Guide User" });
-    closeModal();
-  };
+  const renderNavLinks = () => (
+    <ul className="nav-links">
+      {user?.role === "guide" ? (
+        <>
+          <li>
+            <Link to="/guide-reviews">Reviews</Link>
+          </li>
+          <li>
+            <Link to="/guide-tours">Tours</Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/guides">Guides</Link>
+          </li>
+          <li>
+            <Link to="/destinations">Destinations</Link>
+          </li>
+          <li>
+            <a href="#contact">Contact Us</a>
+          </li>
+        </>
+      )}
+    </ul>
+  );
 
   return (
     <>
@@ -44,36 +151,7 @@ const Header = () => {
               <img src={logo} alt="Logo" />
             </Link>
           </div>
-          <nav className="nav">
-            <ul className="nav-links">
-              {user && user.role === "guide" ? (
-                // When logged in as a guide, show only Reviews and Tours
-                <>
-                  <li>
-                    <Link to="/guide-reviews">Reviews</Link>
-                  </li>
-                  <li>
-                    <Link to="/guide-tours">Tours</Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/guides">Guides</Link>
-                  </li>
-                  <li>
-                    <Link to="/destinations">Destinations</Link>
-                  </li>
-                  <li>
-                    <a href="#contact">Contact Us</a>
-                  </li>
-                </>
-              )}
-            </ul>
-          </nav>
+          <nav className="nav">{renderNavLinks()}</nav>
           <div className="auth">
             {user ? (
               <div className="profile">
@@ -98,47 +176,15 @@ const Header = () => {
       {activeModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            {activeModal === "login" && (
-              <>
-                <h2>Login</h2>
-                <form onSubmit={handleLogin}>
-                  <input type="email" placeholder="Email" required />
-                  <input type="password" placeholder="Password" required />
-                  <button type="submit">Sign In</button>
-                  <div className="user-type-select">
-                    <div className="guest">
-                      <p>Tourists:</p>
-                      <input type="radio" name="role" value="tourist" />
-                    </div>
-                    <div className="guide">
-                      <p>Guide:</p>
-                      <input type="radio" name="role" value="guide" />
-                    </div>
-                  </div>
-                </form>
-              </>
-            )}
-            {activeModal === "register" && (
-              <>
-                <h2>Register</h2>
-                <form onSubmit={handleRegister}>
-                  <input type="text" placeholder="Full Name" required />
-                  <input type="email" placeholder="Email" required />
-                  <input type="password" placeholder="Password" required />
-                  <button type="submit">Sign Up</button>
-                  <div className="user-type-select">
-                    <div className="guest">
-                      <p>Tourists:</p>
-                      <input type="radio" name="role" value="tourist" />
-                    </div>
-                    <div className="guide">
-                      <p>Guide:</p>
-                      <input type="radio" name="role" value="guide" />
-                    </div>
-                  </div>
-                </form>
-              </>
-            )}
+            {error && <div className="error-message">{error}</div>}
+            <h2>{activeModal === "login" ? "Login" : "Register"}</h2>
+            <AuthForm
+              type={activeModal}
+              formData={formData}
+              onChange={handleInputChange}
+              onSubmit={activeModal === "login" ? handleLogin : handleRegister}
+              loading={loading}
+            />
           </div>
         </div>
       )}
