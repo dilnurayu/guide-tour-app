@@ -12,7 +12,7 @@ import facebook from "../assets/footer/facebook.png";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer" id="contact">
       <div className="footer-photo">
         <img src={footerImage} />
         <div className="footer-overlay">

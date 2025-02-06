@@ -15,7 +15,7 @@ const GuideSearch = () => {
           <h1>Find Your Perfect Guide</h1>
         </div>
         <div className="filter-container">
-          <h1>One way</h1>
+          <h1>Find Guide</h1>
           <div className="filter-row">
             <div className="filter-item">
               <p>Region</p>

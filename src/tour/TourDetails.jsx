@@ -67,7 +67,7 @@ const TourDetails = () => {
         </div>
         <div className="book-tour">
           <div className="book-tour-wrapper">
-            <h1>Book This Guide</h1>
+            <h1>Book This Tour</h1>
             <p>
               Ex optio sequi et quos praesentium in nostrum labore nam rerum
               iusto aut magni nesciunt? Quo quidem neque iste expedita est dolo.

@@ -15,7 +15,7 @@ const TourSearch = () => {
           <h1>Find Your Perfect Tour</h1>
         </div>
         <div className="filter-container">
-          <h1>One way</h1>
+          <h1>Find Tour</h1>
           <div className="filter-row">
             <div className="filter-item">
               <p>Region</p>

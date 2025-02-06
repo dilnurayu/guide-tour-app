@@ -21,6 +21,7 @@ import GuideTours from "./guide-tour/GuideToursList";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
 import GuideToursList from "./guide-tour/GuideToursList";
+import ToursListContainer from "./controllers/TourListContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -70,7 +71,7 @@ function AppRoutes() {
         element={
           <>
             <TourSearch />
-            <ToursList />
+            <ToursListContainer />
           </>
         }
       />
