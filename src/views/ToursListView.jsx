@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegClock } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
-import "../guide/GuidesList.css";
+import "./GuidesList.css";
 import defaultTourImage from "../assets/tour-image.png";
 
 const ToursListView = ({ tours, loading, error }) => {

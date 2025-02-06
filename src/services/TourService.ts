@@ -1,11 +1,7 @@
-// src/services/TourService.ts
 import { Tour, mapTour } from "../models/Tour";
+import { fetchData } from "./api";
 
 export async function fetchTours(): Promise<Tour[]> {
-  const response = await fetch("https://guide-tour-api.vercel.app/tours/");
-  if (!response.ok) {
-    throw new Error("Failed to fetch tours");
-  }
-  const data = await response.json();
+  const data = await fetchData<any[]>("/tours/");
   return data.map(mapTour);
 }

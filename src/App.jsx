@@ -21,7 +21,9 @@ import GuideTours from "./guide-tour/GuideToursList";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
 import GuideToursList from "./guide-tour/GuideToursList";
-import ToursListContainer from "./controllers/TourListContainer";
+import ToursListContainer from "./controllers/ToursListContainer";
+import GuidesListContainer from "./controllers/GuidesListContainer";
+import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -42,7 +44,7 @@ function AppRoutes() {
         element={
           <>
             <GuideSearch />
-            <GuidesList />
+            <GuidesListContainer />
             <StartJourney />
           </>
         }
@@ -78,7 +80,7 @@ function AppRoutes() {
       {user && user.role === "guide" && (
         <>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/guide-tours" element={<GuideToursList />} />
+          <Route path="/guide-tours" element={<GuideToursListContainer />} />
           <Route path="/guide-reviews" element={<GuideReviewList />} />
         </>
       )}
