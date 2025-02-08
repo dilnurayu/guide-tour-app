@@ -55,9 +55,9 @@ const AuthForm = ({ type, formData, onChange, onSubmit, loading }) => {
             placeholder="Full Name"
           />
           <FormInput
-            type="text"
-            name="address"
-            value={formData.address}
+            type="number"
+            name="address_id"
+            value={formData.address_id}
             onChange={onChange}
             placeholder="Address"
           />
@@ -77,7 +77,9 @@ const AuthForm = ({ type, formData, onChange, onSubmit, loading }) => {
         onChange={onChange}
         placeholder="Password"
       />
-      <UserTypeSelect value={formData.user_type} onChange={onChange} />
+      {!isLogin && (
+        <UserTypeSelect value={formData.user_type} onChange={onChange} />
+      )}
       <button type="submit" disabled={loading}>
         {loading
           ? `Signing ${isLogin ? "in" : "up"}...`

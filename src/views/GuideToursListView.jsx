@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./GuideToursList.css";
+import "./style/GuideToursList.css";
 
 const GuideToursListView = ({ tours, loading, error }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

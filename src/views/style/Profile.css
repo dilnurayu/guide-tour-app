@@ -91,6 +91,13 @@
   padding: 8px 10px;
   width: 100%;
 }
+.profile-details-wrapper ul li span textarea {
+  border: gray 0.5px solid;
+  border-radius: 15px;
+  padding: 8px 10px;
+  height: 150px;
+  width: 100%;
+}
 .profile-details-wrapper ul li span button {
   text-align: center;
   padding: 8px 25px;
@@ -99,11 +106,20 @@
   border-radius: 15px;
   color: gray;
 }
+.profile-details-wrapper ul li span select {
+  padding: 8px;
+  border: gray 0.5px solid;
+  background-color: white;
+  border-radius: 15px;
+  color: gray;
+  width: 100%;
+}
 .right-save-button {
   display: flex;
   justify-content: end;
 }
 .right-save-button button {
+  margin-top: 20px;
   border: none;
   padding: 10px 30px;
   border-radius: 8px;

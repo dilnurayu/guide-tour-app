@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegClock, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
-import "../views/GuidesList.css";
+import "./style/GuidesList.css";
 import guidePerson from "../assets/guide-person.png";
 
 const renderStars = (rating) => {

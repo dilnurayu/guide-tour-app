@@ -6,24 +6,20 @@ import Footer from "./skeleton/Footer";
 import Header from "./skeleton/Header";
 import Content from "./landing/Content";
 import LandingBlock from "./landing/LandingBlock";
-import GuidesList from "./guide/GuidesList";
 import StartJourney from "./guide/StartJourney";
-import ToursList from "./tour/ToursList";
 import GuideDetails from "./guide/GuideDetails";
 import ScrollToTop from "./ScrollToTop";
 import GuideReviews from "./guide/GuideReviews";
 import TourSearch from "./tour/TourSearch";
 import GuideSearch from "./guide/GuideSearch";
 import TourDetails from "./tour/TourDetails";
-import Profile from "./profile/Profile";
 import GuideTours from "./guide-tour/GuideToursList";
-// import MyReviews from "./guide/MyReviews"; // Component for guide's own reviews
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
-import GuideToursList from "./guide-tour/GuideToursList";
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
 import GuideToursListContainer from "./controllers/GuidesToursListContainer";
+import ProfileContainer from "./controllers/ProfileContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -79,7 +75,7 @@ function AppRoutes() {
       />
       {user && user.role === "guide" && (
         <>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfileContainer />} />
           <Route path="/guide-tours" element={<GuideToursListContainer />} />
           <Route path="/guide-reviews" element={<GuideReviewList />} />
         </>

@@ -7,12 +7,13 @@ import "./Modal.css";
 import logo from "../assets/UzGuide.png";
 import "./AuthComponents";
 import AuthForm from "./AuthComponents";
+import { parseJwt } from "../auth/jwtDecoder";
 
 const INITIAL_FORM_STATE = {
   name: "",
   email: "",
   password: "",
-  address: "",
+  address_id: 0,
   user_type: "",
 };
 
@@ -60,12 +61,18 @@ const Header = () => {
       const data = await handleAuth("signin", { email, password });
 
       localStorage.setItem("token", data.access_token);
-      localStorage.setItem("userType", formData.user_type);
 
-      setUser({
-        role: formData.user_type,
-        token: data.token,
-      });
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decodedToken = parseJwt(token);
+        if (decodedToken && decodedToken.role) {
+          localStorage.setItem("userType", decodedToken.role);
+        }
+        setUser({
+          token,
+          role: decodedToken ? decodedToken.role : null,
+        });
+      }
 
       closeModal();
       navigate("/profile");
@@ -89,7 +96,7 @@ const Header = () => {
 
       setUser({
         role: formData.user_type,
-        token: loginData.access_token,
+        token: data.access_token,
       });
 
       closeModal();
