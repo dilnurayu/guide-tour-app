@@ -1,6 +1,7 @@
 import React from "react";
 import "../guide/GuideSearch.css";
 import guideListHeader from "../assets/guide-list-header.jpg";
+import perfectTourImg from "../assets/perfect-tour.png";
 
 const TourSearch = () => {
   return (
@@ -12,7 +13,7 @@ const TourSearch = () => {
           className="background-image"
         />
         <div className="text-overlay">
-          <h1>Find Your Perfect Tour</h1>
+          <img src={perfectTourImg} />
         </div>
         <div className="filter-container">
           <h1>Find Tour</h1>

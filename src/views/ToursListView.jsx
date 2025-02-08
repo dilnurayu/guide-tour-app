@@ -8,7 +8,29 @@ import defaultTourImage from "../assets/tour-image.png";
 
 const ToursListView = ({ tours, loading, error }) => {
   if (loading) {
-    return <p>Loading tours...</p>;
+    return (
+      <div className="guides-list-container">
+        <div className="guide-wrapper">
+          <h2>Results: Loading..</h2>
+          <h3>
+            <CiFilter /> Advanced Filter
+          </h3>
+        </div>
+        <ul className="guides-list">
+          {Array.from({ length: 9 }).map((_index) => (
+            <li className="guide-item">
+              <div className="img" />
+              <h3>Loading...</h3>
+              <p>
+                <FaRegClock /> Loading...
+              </p>
+              <p>Price: Loading...</p>
+              <button>Loading...</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
   if (error) {
     return <p className="error-message">Error: {error}</p>;
@@ -41,11 +63,11 @@ const ToursListView = ({ tours, loading, error }) => {
               <p>
                 <FaRegClock />{" "}
                 {tour.duration
-                  ? `${tour.duration} Day${tour.duration > 1 ? "s" : ""}`
+                  ? `${tour.duration} Hour${tour.duration > 1 ? "s" : ""}`
                   : "Duration not set"}
               </p>
               <p>
-                Price: ${tour.price} / {tour.priceType}
+                Price: ${tour.price}/{tour.priceType}
               </p>
               <button>Book this tour</button>
             </li>

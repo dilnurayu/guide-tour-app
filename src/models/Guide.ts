@@ -8,7 +8,7 @@ export interface Guide {
   resumeId: number;
   userId: number;
   rating: number;
-  userName: string;
+  guideName: string;
 }
 
 export function mapGuide(data: any): Guide {
@@ -22,6 +22,6 @@ export function mapGuide(data: any): Guide {
     resumeId: data.resume_id || 0,
     userId: data.user_id || 0,
     rating: data.rating || 0,
-    userName: data.user_name || "",
+    guideName: data.guide_name || "",
   };
 }

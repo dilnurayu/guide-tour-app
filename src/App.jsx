@@ -27,6 +27,7 @@ import GuidesListContainer from "./controllers/GuidesListContainer";
 import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
 import FooterGuide from "./skeleton/FooterGuide";
+import GuideDetailsContainer from "./controllers/GuideDetailsContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -58,7 +59,7 @@ function AppRoutes() {
         path="/guides/:id"
         element={
           <>
-            <GuideDetails />
+            <GuideDetailsContainer />
             <GuideTours />
             <GuideReviews />
             <Footer />

@@ -25,7 +25,29 @@ const renderStars = (rating) => {
 };
 
 const GuidesListView = ({ guides, loading, error }) => {
-  if (loading) return <p>Loading guides...</p>;
+  if (loading)
+    return (
+      <div className="guides-list-container">
+        <div className="guide-wrapper">
+          <h2>Results: Loading..</h2>
+          <h3>
+            <CiFilter /> Advanced Filter
+          </h3>
+        </div>
+        <ul className="guides-list">
+          {Array.from({ length: 9 }).map((_index) => (
+            <li className="guide-item">
+              <div className="img" />
+              <div className="rating">{renderStars(0)}</div>
+              <h3>Loading...</h3>
+              <p>Price: Loading...</p>
+              <button>Loading...</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+
   if (error) return <p className="error-message">Error: {error}</p>;
 
   return (
@@ -39,24 +61,19 @@ const GuidesListView = ({ guides, loading, error }) => {
       <ul className="guides-list">
         {guides.map((guide) => (
           <Link
-            to={`/guides/${guide.userId}`}
-            key={guide.userId}
+            to={`/guides/${guide.resumeId}`}
+            key={guide.resumeId}
             className="guide-item-link"
           >
             <li className="guide-item">
               <img
                 src={guide.photo ? guide.photo : guidePerson}
-                alt={guide.userName}
+                alt={guide.guideName}
               />
               <div className="rating">{renderStars(guide.rating)}</div>
-              <h3>{guide.userName}</h3>
-              <p>{guide.bio}</p>
+              <h3>{guide.guideName}</h3>
               <p>
-                Experience:{" "}
-                {new Date(guide.experienceStartDate).toLocaleDateString()}
-              </p>
-              <p>
-                Price: {guide.price} {guide.priceType}
+                Price: ${guide.price}/{guide.priceType}
               </p>
               <button>Book this guide</button>
             </li>
