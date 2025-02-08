@@ -1,6 +1,11 @@
 // App.js
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 import "./App.css";
 import Footer from "./skeleton/Footer";
 import Header from "./skeleton/Header";
@@ -16,10 +21,12 @@ import TourDetails from "./tour/TourDetails";
 import GuideTours from "./guide-tour/GuideToursList";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
+
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
 import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
+import FooterGuide from "./skeleton/FooterGuide";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -32,6 +39,7 @@ function AppRoutes() {
           <>
             <LandingBlock />
             <Content />
+            <Footer />
           </>
         }
       />
@@ -42,6 +50,7 @@ function AppRoutes() {
             <GuideSearch />
             <GuidesListContainer />
             <StartJourney />
+            <Footer />
           </>
         }
       />
@@ -52,6 +61,7 @@ function AppRoutes() {
             <GuideDetails />
             <GuideTours />
             <GuideReviews />
+            <Footer />
           </>
         }
       />
@@ -61,6 +71,7 @@ function AppRoutes() {
           <>
             <TourDetails />
             <GuideReviews />
+            <Footer />
           </>
         }
       />
@@ -70,14 +81,40 @@ function AppRoutes() {
           <>
             <TourSearch />
             <ToursListContainer />
+            <Footer />
           </>
         }
       />
+
       {user && user.role === "guide" && (
         <>
-          <Route path="/profile" element={<ProfileContainer />} />
-          <Route path="/guide-tours" element={<GuideToursListContainer />} />
-          <Route path="/guide-reviews" element={<GuideReviewList />} />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <ProfileContainer />
+                <FooterGuide />
+              </>
+            }
+          />
+          <Route
+            path="/guide-tours"
+            element={
+              <>
+                <GuideToursListContainer />
+                <FooterGuide />
+              </>
+            }
+          />
+          <Route
+            path="/guide-reviews"
+            element={
+              <>
+                <GuideReviewList />
+                <FooterGuide />
+              </>
+            }
+          />
         </>
       )}
     </Routes>
@@ -86,14 +123,13 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <BrowserRouter>
+      <AuthProvider>
         <ScrollToTop />
         <Header />
         <AppRoutes />
-        <Footer />
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

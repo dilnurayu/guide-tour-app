@@ -1,0 +1,13 @@
+.guide-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #969696;
+  color: #969696;
+  font-size: 12px;
+  background-color: #fff;
+  text-align: center;
+  padding: 6px 0;
+  z-index: 1000;
+}
