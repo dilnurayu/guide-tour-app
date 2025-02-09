@@ -1,19 +1,16 @@
-// src/containers/GuideDetailsContainer.jsx
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
+import { useCallback } from "react";
 import { fetchGuideDetails } from "../services/GuideService";
+import { useFetch } from "../hooks/useFetch";
+import { useParams } from "react-router-dom";
 import GuideDetailsView from "../views/GuideDetailsView";
 
 const GuideDetailsContainer = () => {
   const { id } = useParams();
   const guideId = id ? parseInt(id, 10) : 1;
 
-  const {
-    data: guide,
-    loading,
-    error,
-  } = useFetch(() => fetchGuideDetails(guideId));
+  const fetchGuide = useCallback(() => fetchGuideDetails(guideId), [guideId]);
+
+  const { data: guide, loading, error } = useFetch(fetchGuide);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -12,7 +12,6 @@ import Header from "./skeleton/Header";
 import Content from "./landing/Content";
 import LandingBlock from "./landing/LandingBlock";
 import StartJourney from "./guide/StartJourney";
-import GuideDetails from "./guide/GuideDetails";
 import ScrollToTop from "./ScrollToTop";
 import GuideReviews from "./guide/GuideReviews";
 import TourSearch from "./tour/TourSearch";
@@ -28,6 +27,8 @@ import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
 import FooterGuide from "./skeleton/FooterGuide";
 import GuideDetailsContainer from "./controllers/GuideDetailsContainer";
+import TourDetailsView from "./views/TourDetailsView";
+import TourDetailsContainer from "./controllers/TourDetailsContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -70,7 +71,7 @@ function AppRoutes() {
         path="/destinations/:id"
         element={
           <>
-            <TourDetails />
+            <TourDetailsContainer />
             <GuideReviews />
             <Footer />
           </>
