@@ -16,19 +16,17 @@ import ScrollToTop from "./ScrollToTop";
 import GuideReviews from "./guide/GuideReviews";
 import TourSearch from "./tour/TourSearch";
 import GuideSearch from "./guide/GuideSearch";
-import TourDetails from "./tour/TourDetails";
 import GuideTours from "./guide-tour/GuideToursList";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
 
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
-import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
 import FooterGuide from "./skeleton/FooterGuide";
 import GuideDetailsContainer from "./controllers/GuideDetailsContainer";
-import TourDetailsView from "./views/TourDetailsView";
 import TourDetailsContainer from "./controllers/TourDetailsContainer";
+import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -104,7 +102,6 @@ function AppRoutes() {
             element={
               <>
                 <GuideToursListContainer />
-                <FooterGuide />
               </>
             }
           />

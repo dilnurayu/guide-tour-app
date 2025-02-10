@@ -1,4 +1,4 @@
-import { Tour, mapTour } from "../models/Tour";
+import { mapTour, Tour } from "../models/Tour";
 
 export async function fetchGuideTours(): Promise<Tour[]> {
   const token = localStorage.getItem("token");
@@ -20,18 +20,43 @@ export async function fetchGuideTours(): Promise<Tour[]> {
 
     if (!response.ok) {
       const errorData = await response.json();
-      if (response.status === 400 && errorData.detail) {
-        throw new Error(errorData.detail);
-      }
       throw new Error(
-        `Error fetching tours: ${response.status} - ${response.statusText}`
+        errorData.detail || `Error fetching tours: ${response.status}`
       );
     }
 
     const data = await response.json();
     return data.map(mapTour);
-  } catch (error: any) {
+  } catch (error) {
     console.error("FetchTours Error:", error);
+    throw error;
+  }
+}
+
+export async function createTour(formData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const response = await fetch("https://guide-tour-api.vercel.app/tours/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token.trim()}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || "Error creating tour");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("CreateTour Error:", error);
     throw error;
   }
 }

@@ -52,11 +52,7 @@ const ToursListView = ({ tours, loading, error }) => {
           >
             <li className="guide-item">
               <img
-                src={
-                  tour.photoGallery && tour.photoGallery.length > 0
-                    ? tour.photoGallery[0]
-                    : defaultTourImage
-                }
+                src={tour.photoGallery?.[0] || defaultTourImage}
                 alt={tour.about}
               />
               <h3>{tour.about}</h3>

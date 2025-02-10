@@ -1,12 +1,36 @@
-import React from "react";
-import GuideToursList from "../views/GuideToursListView";
+import React, { useState } from "react";
+import GuideToursListView from "../views/GuideToursListView";
+import CreateTourForm from "../views/CreateTourForm";
 import { fetchGuideTours } from "../services/GuideToursService";
 import { useFetch } from "../hooks/useFetch";
+import FooterGuide from "../skeleton/FooterGuide";
 
 const GuideToursListContainer = () => {
-  const { data: tours, loading, error } = useFetch(fetchGuideTours);
+  const { data: tours, loading, error, refetch } = useFetch(fetchGuideTours);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  return <GuideToursList tours={tours || []} loading={loading} error={error} />;
+  const handleTourCreated = () => {
+    setIsModalOpen(false);
+    refetch();
+  };
+
+  return (
+    <>
+      <GuideToursListView
+        tours={tours || []}
+        loading={loading}
+        error={error}
+        onCreateClick={() => setIsModalOpen(true)}
+      />
+      <FooterGuide />
+      {isModalOpen && (
+        <CreateTourForm
+          onClose={() => setIsModalOpen(false)}
+          onCreated={handleTourCreated}
+        />
+      )}
+    </>
+  );
 };
 
 export default GuideToursListContainer;

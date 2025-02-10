@@ -2,7 +2,6 @@
   max-width: 1200px;
   margin: 20px auto;
 }
-
 .line {
   background-color: gainsboro;
   height: 1px;
@@ -22,7 +21,6 @@
   margin: 0;
   padding: 0;
 }
-
 .guide-tour-container {
   padding: 20px;
   border-radius: 20px;
@@ -30,7 +28,6 @@
   display: flex;
   justify-content: space-between;
 }
-
 .guide-tour-container button {
   margin: auto 0;
   width: fit-content;
@@ -45,7 +42,6 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
 .guide-tour-container button:hover {
   background-color: #e96a00;
 }

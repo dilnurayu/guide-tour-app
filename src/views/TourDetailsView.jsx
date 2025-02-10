@@ -1,10 +1,8 @@
-// src/views/TourDetailsView.jsx
 import React from "react";
 import "./style/TourDetails.css";
 import image from "../assets/tour-image.png";
 
 const TourDetailsView = ({ tour }) => {
-  // Optionally, you can format the date.
   const formattedDate = new Date(tour.date).toLocaleDateString();
 
   return (
@@ -95,14 +93,14 @@ const TourDetailsView = ({ tour }) => {
         <div className="tour-gallery-photos">
           {tour.photoGallery && tour.photoGallery.length > 0 ? (
             tour.photoGallery.map((photo, index) => (
-              <img
-                key={index}
-                src={"http://localhost:8000" + photo || image}
-                alt={`Gallery ${index + 1}`}
-              />
+              <div key={index} className="tour-gallery-photo">
+                <img src={photo || image} alt={`Gallery ${index + 1}`} />
+              </div>
             ))
           ) : (
-            <img src={image} alt="Default Gallery" />
+            <div className="tour-gallery-photo">
+              <img src={image} alt="Default Gallery" />
+            </div>
           )}
         </div>
       </div>

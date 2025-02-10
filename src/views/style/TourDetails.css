@@ -124,9 +124,22 @@ h5 {
   margin-bottom: 14px;
 }
 .tour-gallery-photos {
-  gap: 10px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
 }
-.tour-gallery-photos img {
-  width: -webkit-fill-available;
+
+.tour-gallery-photo {
+  flex: 1 1 calc(33.333% - 7px);
+  aspect-ratio: 1/1;
+  min-width: 0;
+  position: relative;
+}
+
+.tour-gallery-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
