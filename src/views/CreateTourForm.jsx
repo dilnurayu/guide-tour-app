@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createTour } from "../services/GuideToursService";
-
+import "../skeleton/Modal.css";
 const CreateTourForm = ({ onClose, onCreated }) => {
   const [formData, setFormData] = useState({
     title: "",
