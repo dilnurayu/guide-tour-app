@@ -55,7 +55,7 @@ const ToursListView = ({ tours, loading, error }) => {
                 src={tour.photoGallery?.[0] || defaultTourImage}
                 alt={tour.about}
               />
-              <h3>{tour.about}</h3>
+              <h3>{tour.title}</h3>
               <p>
                 <FaRegClock />{" "}
                 {tour.duration

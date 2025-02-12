@@ -149,3 +149,54 @@ button {
 .footer-socials ul {
   display: flex;
 }
+
+@media (max-width: 768px) {
+  .footer-photo {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+  }
+  .footer-overlay {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: initial;
+    color: white;
+    width: auto;
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .footer-overlay img {
+    width: 100%;
+  }
+  .footer-content {
+    bottom: auto;
+    width: auto;
+    margin-top: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-left p {
+    width: auto;
+  }
+  .footer-left,
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+  .footer-right {
+    margin-top: 40px;
+  }
+  .footer-bottom {
+    position: relative;
+  }
+  .footer-image {
+    position: absolute;
+  }
+  .footer-photo .footer-image {
+    width: auto;
+  }
+}

@@ -1,4 +1,3 @@
-// src/views/GuidesListView.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegClock, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";

@@ -7,13 +7,16 @@ html {
   color: black;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 }
+
 .header-wrapper {
   max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px;
   margin: 0 auto;
 }
 
@@ -38,4 +41,79 @@ html {
   color: black;
   margin-left: 20px;
   cursor: pointer;
+}
+
+.mobile-menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.mobile-nav {
+  background-color: white;
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.mobile-nav-links li {
+  margin-bottom: 20px;
+}
+
+.mobile-nav-links a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-auth a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav,
+  .auth {
+    display: none;
+  }
+
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-wrapper {
+    padding: 10px 20px;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+  }
 }

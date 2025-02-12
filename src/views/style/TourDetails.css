@@ -16,6 +16,7 @@ h5 {
   border-radius: 20px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
+
 .tour-details-wrapper {
   display: flex;
   justify-content: space-between;
@@ -25,28 +26,34 @@ h5 {
   font-size: 14px;
   color: gray;
 }
+
 .tour-about {
   width: 70%;
 }
+
 .tour-about-wrapper {
   padding-right: 40px;
 }
+
 .tour-about ul {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 .tour-about ul li {
   display: flex;
   flex-direction: row;
   list-style: none;
 }
+
 .tour-about ul li p {
   color: #e96a00;
   font-weight: bold;
   width: 33%;
 }
+
 .tour-about ul li span {
   width: 50%;
 }
@@ -56,6 +63,7 @@ h5 {
   display: flex;
   justify-content: space-between;
 }
+
 .tour-about-button-wrapper button {
   width: fit-content;
   height: 45px;
@@ -81,6 +89,7 @@ h5 {
   margin-top: 30px;
   height: fit-content;
 }
+
 .book-tour-wrapper {
   display: flex;
   flex-direction: column;
@@ -93,6 +102,7 @@ h5 {
   margin-bottom: 20px;
   margin-top: 5px;
 }
+
 .book-tour-wrapper input {
   width: 100%;
   padding: 15px 20px;
@@ -123,6 +133,7 @@ h5 {
   margin-top: 14px;
   margin-bottom: 14px;
 }
+
 .tour-gallery-photos {
   display: flex;
   flex-wrap: wrap;
@@ -142,4 +153,82 @@ h5 {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+@media (max-width: 1024px) {
+  .tour-details {
+    padding: 30px;
+    margin: 20px auto;
+  }
+
+  .tour-details-wrapper {
+    flex-direction: column;
+  }
+
+  .tour-about,
+  .book-tour {
+    width: 100%;
+  }
+
+  .tour-about-wrapper {
+    padding-right: 0;
+  }
+
+  .book-tour {
+    margin-top: 20px;
+  }
+
+  .tour-about ul li {
+    flex-direction: column;
+  }
+
+  .tour-about ul li p,
+  .tour-about ul li span {
+    width: 100%;
+  }
+  .tour-gallery-photo {
+    flex: 1 1 calc(50% - 7px);
+  }
+}
+
+@media (max-width: 768px) {
+  .tour-details {
+    width: 90%;
+    padding: 20px;
+    margin: 10px auto;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 12px;
+  }
+
+  .tour-details-wrapper {
+    flex-direction: column;
+  }
+
+  .tour-about,
+  .book-tour {
+    width: 100%;
+  }
+
+  .book-tour-wrapper {
+    padding: 20px;
+  }
+
+  .tour-about ul li {
+    flex-direction: row;
+  }
+
+  .tour-about ul li p,
+  .tour-about ul li span {
+    width: 100%;
+  }
+
+  .tour-gallery-photo {
+    flex: 1 1 calc(50% - 7px);
+  }
 }

@@ -8,11 +8,12 @@
   margin-bottom: 20px;
 }
 
-.profile-image {
-  width: 30%;
-}
 .profile-content {
   display: flex;
+}
+
+.profile-image {
+  width: 30%;
 }
 
 .profile-image-wrapper {
@@ -23,8 +24,11 @@
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
   gap: 20px;
 }
+
 .profile-image-wrapper img {
   border-radius: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .profile-image-wrapper .edit,
@@ -35,7 +39,7 @@
 }
 
 .profile-image-wrapper .edit {
-  border: 1px black solid;
+  border: 1px solid black;
   padding: 5px 15px;
   border-radius: 8px;
   background-color: white;
@@ -50,6 +54,7 @@
   font-size: 16px;
   color: white;
 }
+
 .profile-image-wrapper .logout {
   border: none;
   padding: 5px 15px;
@@ -73,51 +78,60 @@
   flex-direction: column;
   gap: 15px;
 }
+
 .profile-details-wrapper ul li {
   display: flex;
   flex-direction: row;
   list-style: none;
 }
+
 .profile-details-wrapper ul li p {
   font-weight: bold;
   width: 30%;
 }
+
 .profile-details-wrapper ul li span {
   width: 70%;
 }
+
 .profile-details-wrapper ul li span input {
-  border: gray 0.5px solid;
+  border: 0.5px solid gray;
   border-radius: 15px;
   padding: 8px 10px;
   width: 100%;
 }
+
 .profile-details-wrapper ul li span textarea {
-  border: gray 0.5px solid;
+  border: 0.5px solid gray;
   border-radius: 15px;
   padding: 8px 10px;
   height: 150px;
   width: 100%;
 }
+
 .profile-details-wrapper ul li span button {
   text-align: center;
   padding: 8px 25px;
-  border: gray 0.5px solid;
+  border: 0.5px solid gray;
   background-color: white;
   border-radius: 15px;
   color: gray;
 }
+
 .profile-details-wrapper ul li span select {
   padding: 8px;
-  border: gray 0.5px solid;
+  border: 0.5px solid gray;
   background-color: white;
   border-radius: 15px;
   color: gray;
   width: 100%;
 }
+
 .right-save-button {
   display: flex;
   justify-content: end;
 }
+
 .right-save-button button {
   margin-top: 20px;
   border: none;
@@ -126,4 +140,79 @@
   background-color: #ff7b1a;
   font-size: 16px;
   color: white;
+}
+
+@media (max-width: 1024px) {
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-image,
+  .profile-details {
+    width: 100%;
+  }
+
+  .profile-image-wrapper {
+    padding: 20px;
+  }
+
+  .profile-details-wrapper {
+    padding-left: 0;
+    margin-top: 20px;
+  }
+
+  .profile-details-wrapper ul li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-details-wrapper ul li p,
+  .profile-details-wrapper ul li span {
+    width: 100%;
+  }
+
+  .right-save-button {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile {
+    padding: 10px;
+  }
+
+  .profile h1 {
+    text-align: center;
+  }
+
+  .profile-image-wrapper {
+    padding: 15px;
+  }
+
+  .profile-details-wrapper ul li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-details-wrapper ul li p,
+  .profile-details-wrapper ul li span {
+    width: 100%;
+  }
+
+  .profile-details-wrapper ul li span input,
+  .profile-details-wrapper ul li span textarea,
+  .profile-details-wrapper ul li span select {
+    font-size: 14px;
+  }
+
+  .right-save-button {
+    justify-content: center;
+  }
+
+  .profile-image-wrapper .edit,
+  .profile-image-wrapper .delete,
+  .profile-image-wrapper .logout {
+    width: 90%;
+  }
 }

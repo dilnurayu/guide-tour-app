@@ -3,6 +3,7 @@ import { createTour } from "../services/GuideToursService";
 
 const CreateTourForm = ({ onClose, onCreated }) => {
   const [formData, setFormData] = useState({
+    title: "",
     about: "",
     guestCount: "",
     languageIds: "",
@@ -43,6 +44,7 @@ const CreateTourForm = ({ onClose, onCreated }) => {
     setLoading(true);
 
     const tourData = {
+      title: formData.title,
       guest_count: Number(formData.guestCount),
       price: Number(formData.price),
       price_type: formData.priceType,
@@ -66,7 +68,6 @@ const CreateTourForm = ({ onClose, onCreated }) => {
     const requestData = new FormData();
     requestData.append("tour_data", JSON.stringify(tourData));
 
-    // Append each photo individually.
     photos.forEach((photo) => {
       requestData.append("photos", photo, photo.name);
     });
@@ -85,7 +86,19 @@ const CreateTourForm = ({ onClose, onCreated }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <h2>Create a New Tour</h2>
+
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Tour Title"
+              required
+            />
+          </div>
           <div className="form-group">
             <label>About:</label>
             <input

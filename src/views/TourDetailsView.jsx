@@ -10,7 +10,7 @@ const TourDetailsView = ({ tour }) => {
       <div className="tour-details-wrapper">
         <div className="tour-about">
           <div className="tour-about-wrapper">
-            <h1>Tour #{tour.tourId} Details</h1>
+            <h1>{tour.title}</h1>
             <h5>{tour.duration} hours</h5>
             <div className="rating">
               {[...Array(5)].map((_, i) => (

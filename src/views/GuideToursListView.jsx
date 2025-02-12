@@ -1,4 +1,5 @@
 import "./style/GuideToursList.css";
+import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 
 const GuideToursListView = ({ tours, loading, error, onCreateClick }) => {
   if (loading) return <p>Loading...</p>;
@@ -14,7 +15,7 @@ const GuideToursListView = ({ tours, loading, error, onCreateClick }) => {
       {tours.map((tour) => (
         <div className="guide-tour-list-container" key={tour.tourId}>
           <div className="guide-tour-list-left">
-            <h3>{tour.about}</h3>
+            <h3>{tour.title}</h3>
             <p>
               {tour.duration} Days | Languages: {tour.languageIds.join(", ")}
             </p>
@@ -25,6 +26,14 @@ const GuideToursListView = ({ tours, loading, error, onCreateClick }) => {
           <div className="tours-buttons">
             <button>Edit</button>
             <button>Delete</button>
+          </div>
+          <div className="tours-mobile-buttons">
+            <button>
+              <MdOutlineModeEdit size={25} />
+            </button>
+            <button>
+              <MdDelete size={25} />
+            </button>
           </div>
         </div>
       ))}

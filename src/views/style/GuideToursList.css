@@ -45,3 +45,24 @@
 .guide-tour-container button:hover {
   background-color: #e96a00;
 }
+.tours-mobile-buttons {
+  display: none;
+}
+@media (max-width: 768px) {
+  .guide-tours-list {
+    width: 90%;
+  }
+  .tours-buttons {
+    display: none;
+  }
+  .tours-mobile-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+  }
+  .tours-mobile-buttons button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+  }
+}

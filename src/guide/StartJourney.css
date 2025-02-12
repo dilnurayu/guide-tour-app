@@ -1,17 +1,30 @@
-.start-journey{
+.start-journey {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(220, 125, 31, 1);
+  color: white;
+  padding: 80px;
+}
+.start-journey-wrapper {
+  width: 70%;
+}
+.start-journey button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  height: min-content;
+}
+@media (max-width: 768px) {
+  .start-journey {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(220, 125, 31, 1);
-    color: white;
-    padding: 80px;
-}
-.start-journey-wrapper{
-    width: 70%;
-}
-.start-journey button{
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    height: min-content;
+    flex-direction: column;
+  }
+  .start-journey-wrapper {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  .start-journey-wrapper h1 {
+    margin-bottom: 20px;
+  }
 }

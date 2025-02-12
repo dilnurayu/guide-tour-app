@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <div className="footer" id="contact">
       <div className="footer-photo">
-        <img src={footerImage} />
+        <img src={footerImage} className="footer-image" />
         <div className="footer-overlay">
           <img src={stayUpdated} />
           <div className="footer-input">

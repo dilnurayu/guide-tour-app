@@ -93,7 +93,7 @@ function AppRoutes() {
             element={
               <>
                 <ProfileContainer />
-                <FooterGuide />
+                {/* <FooterGuide /> */}
               </>
             }
           />
@@ -110,7 +110,7 @@ function AppRoutes() {
             element={
               <>
                 <GuideReviewList />
-                <FooterGuide />
+                {/* <FooterGuide /> */}
               </>
             }
           />

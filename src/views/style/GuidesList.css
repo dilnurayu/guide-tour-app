@@ -5,12 +5,12 @@
 .guides-list-container .guide-wrapper {
   text-align: left;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding-left: 10px;
   margin-top: 10%;
   justify-content: space-between;
   display: flex;
+  align-items: center;
 }
 
 .guide-wrapper {
@@ -42,32 +42,19 @@
   margin: 0 auto;
   max-width: 1200px;
 }
-.guides-list-container ul li .img {
-  height: 380px;
-  width: 370px;
-  background-color: #ddd;
-}
-.guides-list-container ul li img {
-  height: 380px;
-  width: 370px;
-}
-.guide-item button {
-  margin-top: 10px;
-  border: 2px solid;
-  border-color: blue;
-  padding: 10px 20px;
-  background-color: white;
-}
 
-.guide-item button:hover {
-  border-color: blue;
-  color: white;
-  background-color: blue;
+.guides-list-container ul li .img,
+.guides-list-container ul li img {
+  width: 370px;
+  height: 380px;
+  object-fit: cover;
+  background-color: #ddd;
 }
 
 .guide-item {
   text-align: left;
   background: white;
+  padding: 10px;
 }
 
 .guide-item h3 {
@@ -94,4 +81,78 @@
 
 .empty-star {
   color: #ddd;
+}
+
+.guide-item button {
+  margin-top: 10px;
+  border: 2px solid blue;
+  padding: 10px 20px;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.guide-item button:hover {
+  border-color: blue;
+  color: white;
+  background-color: blue;
+}
+
+@media (max-width: 1024px) {
+  .guides-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 100%;
+  }
+
+  .guides-list-container .guide-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 5%;
+  }
+
+  .guides-list-container ul li .img,
+  .guides-list-container ul li img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .guides-list-container {
+    padding: 10px;
+  }
+
+  .guides-list-container .guide-wrapper {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    text-align: center;
+  }
+
+  .guide-wrapper h2,
+  .guide-wrapper h3 {
+    text-align: center;
+  }
+
+  .guides-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .guides-list-container ul li .img,
+  .guides-list-container ul li img {
+    width: 100%;
+    height: auto;
+  }
+
+  .guide-item {
+    padding: 10px;
+  }
+
+  .guide-item button {
+    width: 100%;
+    padding: 10px;
+  }
 }

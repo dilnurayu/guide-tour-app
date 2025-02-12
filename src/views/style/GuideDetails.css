@@ -2,7 +2,6 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 40px;
-
   border-radius: 20px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
@@ -12,13 +11,13 @@
   display: flex;
 }
 
+.left-section {
+  width: 70%;
+}
+
 .right-section {
   width: 30%;
   text-align: center;
-}
-
-.left-section {
-  width: 70%;
 }
 
 .right-section-wrapper {
@@ -33,9 +32,11 @@
   gap: 10px;
   border-radius: 20px;
 }
+
 .left-section-wrapper h2 {
   margin-bottom: 10px;
 }
+
 .profile-picture {
   width: 150px;
   height: 150px;
@@ -72,20 +73,16 @@
 .regions-list {
   display: flex;
 }
-.languages-list p,
-.regions-list p {
-  display: inline;
-}
-
-.languages-list p:not(:last-child)::after,
-.regions-list p:not(:last-child)::after {
-  content: ", ";
-}
 
 .languages-list p,
 .regions-list p {
   display: inline;
   margin-right: 5px;
+}
+
+.languages-list p:not(:last-child)::after,
+.regions-list p:not(:last-child)::after {
+  content: ", ";
 }
 
 .about-text {
@@ -94,14 +91,11 @@
   line-height: 1.6;
 }
 
-.photo-grid {
-  display: flex;
-  gap: 10px;
-}
-
 .bottom-profile-wrapper {
   display: flex;
+  margin-top: 40px;
 }
+
 .profile-gallery {
   width: 70%;
 }
@@ -112,6 +106,12 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.photo-grid {
+  display: flex;
+  gap: 10px;
+}
+
 .book-guide {
   width: 30%;
   text-align: center;
@@ -120,6 +120,7 @@
   margin-top: 30px;
   height: fit-content;
 }
+
 .book-guide-wrapper {
   display: flex;
   flex-direction: column;
@@ -129,9 +130,9 @@
 
 .book-guide-wrapper p {
   font-size: 13px;
-  margin-bottom: 20px;
-  margin-top: 5px;
+  margin: 5px 0 20px;
 }
+
 .book-guide-wrapper input {
   width: 100%;
   padding: 15px 20px;
@@ -140,7 +141,7 @@
 }
 
 .book-guide-wrapper button {
-  margin: 20px auto 0 auto;
+  margin: 20px auto 0;
   width: fit-content;
   height: 50px;
   background-color: #ff7b1a;
@@ -156,4 +157,104 @@
 
 .book-guide-wrapper button:hover {
   background-color: #e96a00;
+}
+
+@media (max-width: 1024px) {
+  .profile-container {
+    padding: 30px;
+    margin: 20px auto;
+  }
+
+  .about-container {
+    flex-direction: column;
+  }
+  .left-section,
+  .right-section {
+    width: 100%;
+  }
+  .right-section {
+    margin-top: 20px;
+  }
+
+  .bottom-profile-wrapper {
+    flex-direction: column;
+  }
+  .profile-gallery,
+  .book-guide {
+    width: 100%;
+  }
+  .profile-gallery-wrapper {
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+  .book-guide {
+    margin-top: 20px;
+  }
+
+  .languages-list,
+  .regions-list {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    width: 90%;
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .about-container {
+    flex-direction: column;
+  }
+  .left-section,
+  .right-section {
+    width: 100%;
+  }
+  .right-section {
+    margin-top: 15px;
+  }
+
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+  .profile-name {
+    font-size: 20px;
+  }
+  .rating .star {
+    font-size: 18px;
+  }
+  .experience-date {
+    font-size: 12px;
+  }
+  .left-section-wrapper h2 {
+    font-size: 18px;
+  }
+  .about-text {
+    font-size: 14px;
+  }
+
+  .bottom-profile-wrapper {
+    flex-direction: column;
+  }
+  .profile-gallery,
+  .book-guide {
+    width: 100%;
+  }
+  .book-guide-wrapper {
+    padding: 20px;
+  }
+  .book-guide-wrapper input {
+    padding: 10px 15px;
+  }
+  .book-guide-wrapper button {
+    padding: 10px 30px;
+    font-size: 14px;
+  }
+
+  .photo-grid img {
+    width: 100%;
+    flex-direction: column;
+  }
 }

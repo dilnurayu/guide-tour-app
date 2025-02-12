@@ -52,3 +52,8 @@ h4 {
   border-radius: 100%;
   margin-right: 20px;
 }
+@media (max-width: 768px) {
+  .guide-reviews {
+    width: 90%;
+  }
+}

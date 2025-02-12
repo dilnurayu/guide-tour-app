@@ -22,7 +22,7 @@ const GuideToursListContainer = () => {
         error={error}
         onCreateClick={() => setIsModalOpen(true)}
       />
-      <FooterGuide />
+      {/* <FooterGuide /> */}
       {isModalOpen && (
         <CreateTourForm
           onClose={() => setIsModalOpen(false)}

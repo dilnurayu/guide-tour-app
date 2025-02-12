@@ -1,4 +1,5 @@
 export interface Tour {
+  title: string;
   guestCount: number;
   price: number;
   priceType: string;
@@ -19,6 +20,7 @@ export interface Tour {
 
 export function mapTour(data: any): Tour {
   return {
+    title: data.title,
     guestCount: data.guest_count,
     price: data.price,
     priceType: data.price_type,
