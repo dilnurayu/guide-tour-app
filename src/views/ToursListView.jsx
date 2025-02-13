@@ -1,10 +1,28 @@
 // src/views/ToursListView.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaRegStar, FaStar } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
 import "./style/GuidesList.css";
 import defaultTourImage from "../assets/tour-image.png";
+
+const renderStars = (rating) => {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+  const emptyStars = 5 - fullStars - halfStar;
+
+  return (
+    <>
+      {[...Array(fullStars)].map((_, i) => (
+        <FaStar key={`full-${i}`} className="star full-star" />
+      ))}
+      {halfStar === 1 && <FaStarHalfAlt className="star half-star" />}
+      {[...Array(emptyStars)].map((_, i) => (
+        <FaRegStar key={`empty-${i}`} className="star empty-star" />
+      ))}
+    </>
+  );
+};
 
 const ToursListView = ({ tours, loading, error }) => {
   if (loading) {
@@ -20,6 +38,7 @@ const ToursListView = ({ tours, loading, error }) => {
           {Array.from({ length: 9 }).map((_index) => (
             <li className="guide-item">
               <div className="img" />
+              <p>{renderStars(0)}</p>
               <h3>Loading...</h3>
               <p>
                 <FaRegClock /> Loading...
@@ -55,6 +74,7 @@ const ToursListView = ({ tours, loading, error }) => {
                 src={tour.photoGallery?.[0] || defaultTourImage}
                 alt={tour.about}
               />
+              <p>{renderStars(tour.averageRating)}</p>
               <h3>{tour.title}</h3>
               <p>
                 <FaRegClock />{" "}

@@ -5,7 +5,6 @@ import ProfileView from "../views/ProfileView";
 
 const ProfileContainer = () => {
   const [profileData, setProfileData] = useState(null);
-
   const [formData, setFormData] = useState({
     bio: "",
     experience_start_date: "",
@@ -15,8 +14,18 @@ const ProfileContainer = () => {
     price_type: "",
   });
 
+  const [originalFormData, setOriginalFormData] = useState({
+    bio: "",
+    experience_start_date: "",
+    languages: [],
+    addresses: [],
+    price: 0,
+    price_type: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasResume, setHasResume] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +36,7 @@ const ProfileContainer = () => {
         ]);
         setProfileData(profile);
         if (resume) {
-          setFormData({
+          const resumeData = {
             bio: resume.bio || "",
             experience_start_date: resume.experience_start_date || "",
             languages: resume.languages
@@ -38,7 +47,14 @@ const ProfileContainer = () => {
               : [],
             price: resume.price || 0,
             price_type: resume.price_type || "",
-          });
+          };
+          setFormData(resumeData);
+          setOriginalFormData(resumeData);
+          setHasResume(true);
+          setEditMode(false);
+        } else {
+          setHasResume(false);
+          setEditMode(true);
         }
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -65,7 +81,7 @@ const ProfileContainer = () => {
     setError(null);
     try {
       const resume = await createResume(formData);
-      setFormData({
+      const resumeData = {
         bio: resume.bio || "",
         experience_start_date: resume.experience_start_date || "",
         languages: resume.languages ? resume.languages.map((l) => l.name) : [],
@@ -74,13 +90,22 @@ const ProfileContainer = () => {
           : [],
         price: resume.price || 0,
         price_type: resume.price_type || "",
-      });
+      };
+      setFormData(resumeData);
+      setOriginalFormData(resumeData);
+      setHasResume(true);
+      setEditMode(false);
       alert("Resume created successfully!");
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    setFormData(originalFormData);
+    setEditMode(false);
   };
 
   return (
@@ -91,6 +116,10 @@ const ProfileContainer = () => {
       handleSubmit={handleSubmit}
       loading={loading}
       error={error}
+      editMode={editMode}
+      setEditMode={setEditMode}
+      handleCancel={handleCancel}
+      hasResume={hasResume}
     />
   );
 };

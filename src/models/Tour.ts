@@ -16,6 +16,7 @@ export interface Tour {
   tourId: number;
   destinationIds: number[];
   languageIds: number[];
+  averageRating: number[];
 }
 
 export function mapTour(data: any): Tour {
@@ -37,5 +38,6 @@ export function mapTour(data: any): Tour {
     tourId: data.tour_id,
     destinationIds: data.destination_ids,
     languageIds: data.language_ids,
+    averageRating: data.average_rating,
   };
 }

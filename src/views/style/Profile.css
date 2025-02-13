@@ -142,6 +142,20 @@
   color: white;
 }
 
+.buttons-container button {
+  margin-top: 20px;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  background-color: #ff7b1a;
+  font-size: 16px;
+  color: white;
+}
+.edit-mode-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 @media (max-width: 1024px) {
   .profile-content {
     flex-direction: column;
