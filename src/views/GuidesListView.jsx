@@ -4,24 +4,7 @@ import { FaRegClock, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
 import "./style/GuidesList.css";
 import guidePerson from "../assets/guide-person.png";
-
-const renderStars = (rating) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStar;
-
-  return (
-    <>
-      {[...Array(fullStars)].map((_, i) => (
-        <FaStar key={`full-${i}`} className="star full-star" />
-      ))}
-      {halfStar === 1 && <FaStarHalfAlt className="star half-star" />}
-      {[...Array(emptyStars)].map((_, i) => (
-        <FaRegStar key={`empty-${i}`} className="star empty-star" />
-      ))}
-    </>
-  );
-};
+import renderStars from "../components/RenderStars";
 
 const GuidesListView = ({ guides, loading, error }) => {
   if (loading)

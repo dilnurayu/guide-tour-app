@@ -79,7 +79,6 @@ function AppRoutes() {
         path="/destinations"
         element={
           <>
-            <TourSearch />
             <ToursListContainer />
             <Footer />
           </>

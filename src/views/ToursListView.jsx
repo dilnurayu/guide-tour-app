@@ -1,42 +1,41 @@
-// src/views/ToursListView.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegClock, FaRegStar, FaStar } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
 import "./style/GuidesList.css";
 import defaultTourImage from "../assets/tour-image.png";
+import FiltersModal from "../components/FiltersModal";
+import renderStars from "../components/RenderStars";
 
-const renderStars = (rating) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStar;
+const ToursListView = ({ tours, loading, error, onApplyFilters }) => {
+  const [showModal, setShowModal] = useState(false);
 
-  return (
-    <>
-      {[...Array(fullStars)].map((_, i) => (
-        <FaStar key={`full-${i}`} className="star full-star" />
-      ))}
-      {halfStar === 1 && <FaStarHalfAlt className="star half-star" />}
-      {[...Array(emptyStars)].map((_, i) => (
-        <FaRegStar key={`empty-${i}`} className="star empty-star" />
-      ))}
-    </>
-  );
-};
+  const renderModal = () =>
+    showModal && (
+      <FiltersModal
+        initialFilters={{}}
+        onApply={(filters) => {
+          setShowModal(false);
+          if (onApplyFilters) {
+            onApplyFilters(filters);
+          }
+        }}
+        onClose={() => setShowModal(false)}
+      />
+    );
 
-const ToursListView = ({ tours, loading, error }) => {
   if (loading) {
     return (
       <div className="guides-list-container">
         <div className="guide-wrapper">
-          <h2>Results: Loading..</h2>
-          <h3>
+          <h2>Results: Loading...</h2>
+          <h3 style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
             <CiFilter /> Advanced Filter
           </h3>
         </div>
         <ul className="guides-list">
-          {Array.from({ length: 9 }).map((_index) => (
-            <li className="guide-item">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <li className="guide-item" key={index}>
               <div className="img" />
               <p>{renderStars(0)}</p>
               <h3>Loading...</h3>
@@ -48,17 +47,20 @@ const ToursListView = ({ tours, loading, error }) => {
             </li>
           ))}
         </ul>
+        {renderModal()}
       </div>
     );
   }
+
   if (error) {
     return <p className="error-message">Error: {error}</p>;
   }
+
   return (
     <div className="guides-list-container">
       <div className="guide-wrapper">
         <h2>Results: {tours.length}</h2>
-        <h3>
+        <h3 style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
           <CiFilter /> Advanced Filter
         </h3>
       </div>
@@ -90,6 +92,7 @@ const ToursListView = ({ tours, loading, error }) => {
           </Link>
         ))}
       </ul>
+      {renderModal()}
     </div>
   );
 };
