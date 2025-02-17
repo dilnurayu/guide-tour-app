@@ -40,3 +40,8 @@ export async function fetchToursDetails(id: number): Promise<Tour> {
   const data = await fetchData<any>(`/tours/${id}/`);
   return mapTour(data);
 }
+
+export async function fetchToursByGuide(guideId: number): Promise<Tour[]> {
+  const data = await fetchData<any>(`/tours/resume/${guideId}/tours`);
+  return data.map(mapTour);
+}

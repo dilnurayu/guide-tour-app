@@ -1,24 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegClock, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CiFilter } from "react-icons/ci";
 import "./style/GuidesList.css";
 import guidePerson from "../assets/guide-person.png";
 import renderStars from "../components/RenderStars";
+import GuideFiltersModal from "../components/GuideFiltersModal";
 
-const GuidesListView = ({ guides, loading, error }) => {
+const GuidesListView = ({ guides, loading, error, onApplyFilters }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const renderModal = () => {
+    if (!showModal) return null;
+    return (
+      <GuideFiltersModal
+        initialFilters={{}}
+        onApply={(filters) => {
+          setShowModal(false);
+          if (onApplyFilters) onApplyFilters(filters);
+        }}
+        onClose={() => setShowModal(false)}
+      />
+    );
+  };
+
   if (loading)
     return (
       <div className="guides-list-container">
         <div className="guide-wrapper">
-          <h2>Results: Loading..</h2>
-          <h3>
+          <h2>Results: Loading...</h2>
+          <h3 style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
             <CiFilter /> Advanced Filter
           </h3>
         </div>
         <ul className="guides-list">
-          {Array.from({ length: 9 }).map((_index) => (
-            <li className="guide-item">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <li className="guide-item" key={index}>
               <div className="img" />
               <div className="rating">{renderStars(0)}</div>
               <h3>Loading...</h3>
@@ -27,6 +43,7 @@ const GuidesListView = ({ guides, loading, error }) => {
             </li>
           ))}
         </ul>
+        {renderModal()}
       </div>
     );
 
@@ -36,7 +53,7 @@ const GuidesListView = ({ guides, loading, error }) => {
     <div className="guides-list-container">
       <div className="guide-wrapper">
         <h2>Results: {guides.length}</h2>
-        <h3>
+        <h3 style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
           <CiFilter /> Advanced Filter
         </h3>
       </div>
@@ -62,6 +79,7 @@ const GuidesListView = ({ guides, loading, error }) => {
           </Link>
         ))}
       </ul>
+      {renderModal()}
     </div>
   );
 };

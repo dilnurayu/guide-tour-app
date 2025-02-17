@@ -1,4 +1,3 @@
-// App.js
 import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
@@ -14,19 +13,18 @@ import LandingBlock from "./landing/LandingBlock";
 import StartJourney from "./guide/StartJourney";
 import ScrollToTop from "./ScrollToTop";
 import GuideReviews from "./guide/GuideReviews";
-import TourSearch from "./tour/TourSearch";
-import GuideSearch from "./guide/GuideSearch";
-import GuideTours from "./guide-tour/GuideToursList";
+import GuideTours from "./guide/GuideTours";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
 import GuideReviewList from "./guide-review/GuideReviewList";
 
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
-import FooterGuide from "./skeleton/FooterGuide";
 import GuideDetailsContainer from "./controllers/GuideDetailsContainer";
 import TourDetailsContainer from "./controllers/TourDetailsContainer";
 import GuideToursListContainer from "./controllers/GuidesToursListContainer";
+import GuideToursContainer from "./controllers/GuideToursContainer";
+import GuideReviewsContainer from "./controllers/GuideReviewContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -47,7 +45,6 @@ function AppRoutes() {
         path="/guides"
         element={
           <>
-            <GuideSearch />
             <GuidesListContainer />
             <StartJourney />
             <Footer />
@@ -59,8 +56,8 @@ function AppRoutes() {
         element={
           <>
             <GuideDetailsContainer />
-            <GuideTours />
-            <GuideReviews />
+            <GuideToursContainer />
+            <GuideReviewsContainer />
             <Footer />
           </>
         }
