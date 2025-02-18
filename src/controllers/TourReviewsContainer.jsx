@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { fetchReviewsByGuide } from "../services/ReviewService";
-import GuideReviewsView from "../views/GuideReviewsView";
+import { fetchReviewsByTours } from "../services/ReviewService";
+import ReviewsView from "../views/ReviewsView";
 import { useParams } from "react-router-dom";
 
-const GuideReviewsContainer = () => {
+const TourReviewsContainer = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchReviewsByGuide(id)
+    fetchReviewsByTours(id)
       .then((data) => {
         setReviews(data);
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        if (err.message.includes("404")) {
+          setReviews([]);
+        } else {
+          setError(err.message);
+        }
         setLoading(false);
       });
   }, [id]);
@@ -24,7 +28,7 @@ const GuideReviewsContainer = () => {
   if (loading) return <div>Loading reviews...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  return <GuideReviewsView reviews={reviews} />;
+  return <ReviewsView reviews={reviews} />;
 };
 
-export default GuideReviewsContainer;
+export default TourReviewsContainer;

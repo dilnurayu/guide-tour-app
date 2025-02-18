@@ -1,4 +1,4 @@
-export interface Review {
+export interface GuideReview {
   resumeId: number;
   title: string;
   description: string;
@@ -6,7 +6,7 @@ export interface Review {
   reviewId: number;
 }
 
-export function mapReview(data: any): Review {
+export function mapGuideReview(data: any): GuideReview {
   return {
     resumeId: data.resume_id,
     title: data.title,

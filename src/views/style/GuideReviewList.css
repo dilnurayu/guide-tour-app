@@ -1,4 +1,4 @@
-/* .guide-review-list {
+.guide-review-list {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 40px;
@@ -8,12 +8,14 @@
   padding: 20px;
   display: flex;
 }
-
 .review-list-container img {
   height: 50px;
   width: 50px;
   border-radius: 100%;
   margin-right: 20px;
+}
+.review-wrapper {
+  width: 100%;
 }
 .reply-button {
   display: flex;
@@ -30,4 +32,4 @@
 .name-date-review {
   display: flex;
   justify-content: space-between;
-} */
+}

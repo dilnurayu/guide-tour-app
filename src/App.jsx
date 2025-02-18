@@ -10,12 +10,9 @@ import Footer from "./skeleton/Footer";
 import Header from "./skeleton/Header";
 import Content from "./landing/Content";
 import LandingBlock from "./landing/LandingBlock";
-import StartJourney from "./guide/StartJourney";
+import StartJourney from "./components/StartJourney";
 import ScrollToTop from "./ScrollToTop";
-import GuideReviews from "./guide/GuideReviews";
-import GuideTours from "./guide/GuideTours";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
-import GuideReviewList from "./guide-review/GuideReviewList";
 
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
@@ -24,7 +21,9 @@ import GuideDetailsContainer from "./controllers/GuideDetailsContainer";
 import TourDetailsContainer from "./controllers/TourDetailsContainer";
 import GuideToursListContainer from "./controllers/GuidesToursListContainer";
 import GuideToursContainer from "./controllers/GuideToursContainer";
-import GuideReviewsContainer from "./controllers/GuideReviewContainer";
+import GuideReviewsContainer from "./controllers/GuideReviewsContainer";
+import TourReviewsContainer from "./controllers/TourReviewsContainer";
+import GuideReviewListContainer from "./controllers/GuideReviewListContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -67,7 +66,7 @@ function AppRoutes() {
         element={
           <>
             <TourDetailsContainer />
-            <GuideReviews />
+            <TourReviewsContainer />
             <Footer />
           </>
         }
@@ -105,7 +104,7 @@ function AppRoutes() {
             path="/guide-reviews"
             element={
               <>
-                <GuideReviewList />
+                <GuideReviewListContainer />
                 {/* <FooterGuide /> */}
               </>
             }
