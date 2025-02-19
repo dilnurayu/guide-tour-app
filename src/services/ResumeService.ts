@@ -42,3 +42,27 @@ export async function getResume() {
   }
   return response.json();
 }
+
+export async function editResume(resumeData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  const response = await fetch(`${BASE_URL}me`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(resumeData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Error creating resume: ${response.status} - ${errorText}`);
+  }
+
+  const data = await response.json();
+  return data;
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createResume, getResume } from "../services/ResumeService";
+import { createResume, editResume, getResume } from "../services/ResumeService";
 import { getProfile } from "../services/ProfileService";
 import ProfileView from "../views/ProfileView";
 
@@ -13,7 +13,6 @@ const ProfileContainer = () => {
     price: 0,
     price_type: "",
   });
-
   const [originalFormData, setOriginalFormData] = useState({
     bio: "",
     experience_start_date: "",
@@ -38,7 +37,9 @@ const ProfileContainer = () => {
         if (resume) {
           const resumeData = {
             bio: resume.bio || "",
-            experience_start_date: resume.experience_start_date || "",
+            experience_start_date: resume.experience_start_date
+              ? resume.experience_start_date.split("T")[0]
+              : "",
             languages: resume.languages
               ? resume.languages.map((l) => l.name)
               : [],
@@ -80,10 +81,19 @@ const ProfileContainer = () => {
     setLoading(true);
     setError(null);
     try {
-      const resume = await createResume(formData);
+      let resume;
+      if (!hasResume) {
+        resume = await createResume(formData);
+        alert("Resume created successfully!");
+      } else {
+        resume = await editResume(formData);
+        alert("Resume updated successfully!");
+      }
       const resumeData = {
         bio: resume.bio || "",
-        experience_start_date: resume.experience_start_date || "",
+        experience_start_date: resume.experience_start_date
+          ? resume.experience_start_date.split("T")[0]
+          : "",
         languages: resume.languages ? resume.languages.map((l) => l.name) : [],
         addresses: resume.addresses
           ? resume.addresses.map((a) => a.address_id)
@@ -95,7 +105,6 @@ const ProfileContainer = () => {
       setOriginalFormData(resumeData);
       setHasResume(true);
       setEditMode(false);
-      alert("Resume created successfully!");
     } catch (err) {
       setError(err.message);
     } finally {

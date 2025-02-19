@@ -91,3 +91,33 @@ export async function updateTour(
     throw error;
   }
 }
+
+export async function deleteTour(tourId) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const response = await fetch(
+      `https://guide-tour-api.vercel.app/tours/${tourId}/`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token.trim()}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.detail || `Error deleting tour: ${response.status}`
+      );
+    }
+    return;
+  } catch (error) {
+    console.error("DeleteTour Error:", error);
+    throw error;
+  }
+}
