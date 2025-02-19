@@ -60,3 +60,34 @@ export async function createTour(formData) {
     throw error;
   }
 }
+
+export async function updateTour(
+  tourId: number,
+  formData: FormData
+): Promise<Tour> {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+  try {
+    const response = await fetch(
+      `https://guide-tour-api.vercel.app/tours/${tourId}/`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token.trim()}`,
+        },
+        body: formData,
+      }
+    );
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || "Error updating tour");
+    }
+    const data = await response.json();
+    return mapTour(data);
+  } catch (error) {
+    console.error("EditTour Error:", error);
+    throw error;
+  }
+}

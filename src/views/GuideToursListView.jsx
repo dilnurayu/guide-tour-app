@@ -1,7 +1,14 @@
+// GuideToursListView.js
 import "./style/GuideToursList.css";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 
-const GuideToursListView = ({ tours, loading, error, onCreateClick }) => {
+const GuideToursListView = ({
+  tours,
+  loading,
+  error,
+  onCreateClick,
+  onEditClick,
+}) => {
   const renderContent = () => {
     if (loading) {
       return (
@@ -42,11 +49,14 @@ const GuideToursListView = ({ tours, loading, error, onCreateClick }) => {
           </p>
         </div>
         <div className="tours-buttons">
-          <button className="edit-btn">Edit</button>
+          {/* Pass the tour data to the edit handler */}
+          <button className="edit-btn" onClick={() => onEditClick(tour)}>
+            Edit
+          </button>
           <button className="delete-btn">Delete</button>
         </div>
         <div className="tours-mobile-buttons">
-          <button className="edit-btn">
+          <button className="edit-btn" onClick={() => onEditClick(tour)}>
             <MdOutlineModeEdit size={20} />
           </button>
           <button className="delete-btn">

@@ -1,16 +1,24 @@
+// GuideToursListContainer.js
 import React, { useState } from "react";
 import GuideToursListView from "../views/GuideToursListView";
 import CreateTourForm from "../views/CreateTourForm";
+import EditTourForm from "../views/EditTourForm";
 import { fetchGuideTours } from "../services/GuideToursService";
 import { useFetch } from "../hooks/useFetch";
 import FooterGuide from "../skeleton/FooterGuide";
 
 const GuideToursListContainer = () => {
   const { data: tours, loading, error, refetch } = useFetch(fetchGuideTours);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [tourToEdit, setTourToEdit] = useState(null);
 
   const handleTourCreated = () => {
-    setIsModalOpen(false);
+    setIsCreateModalOpen(false);
+    refetch();
+  };
+
+  const handleTourUpdated = () => {
+    setTourToEdit(null);
     refetch();
   };
 
@@ -20,15 +28,23 @@ const GuideToursListContainer = () => {
         tours={tours || []}
         loading={loading}
         error={error}
-        onCreateClick={() => setIsModalOpen(true)}
+        onCreateClick={() => setIsCreateModalOpen(true)}
+        onEditClick={(tour) => setTourToEdit(tour)}
       />
-      {/* <FooterGuide /> */}
-      {isModalOpen && (
+      {isCreateModalOpen && (
         <CreateTourForm
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => setIsCreateModalOpen(false)}
           onCreated={handleTourCreated}
         />
       )}
+      {tourToEdit && (
+        <EditTourForm
+          tour={tourToEdit}
+          onClose={() => setTourToEdit(null)}
+          onSaved={handleTourUpdated}
+        />
+      )}
+      {/* <FooterGuide /> */}
     </>
   );
 };

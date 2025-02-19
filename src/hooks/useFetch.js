@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export function useFetch(fetchFn) {
   const [state, setState] = useState({
@@ -7,18 +7,19 @@ export function useFetch(fetchFn) {
     error: null,
   });
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await fetchFn();
-        setState({ data, loading: false, error: null });
-      } catch (err) {
-        setState({ data: [], loading: false, error: err.message });
-      }
-    };
-
-    loadData();
+  const loadData = useCallback(async () => {
+    setState((prev) => ({ ...prev, loading: true }));
+    try {
+      const data = await fetchFn();
+      setState({ data, loading: false, error: null });
+    } catch (err) {
+      setState({ data: [], loading: false, error: err.message });
+    }
   }, [fetchFn]);
 
-  return state;
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  return { ...state, refetch: loadData };
 }
