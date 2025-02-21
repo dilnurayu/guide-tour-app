@@ -16,14 +16,18 @@ const GuideToursContainer = () => {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        if (err.message.includes("404")) {
+          setTours([]);
+        } else {
+          setError(err.message);
+        }
+
         setLoading(false);
       });
   }, [id]);
 
-  if (loading) return <div>Loading tours...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return <div>Error: {error}</div>;
-
   return <GuideToursView tours={tours} />;
 };
 

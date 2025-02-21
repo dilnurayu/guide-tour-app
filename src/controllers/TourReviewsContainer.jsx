@@ -25,7 +25,7 @@ const TourReviewsContainer = () => {
       });
   }, [id]);
 
-  if (loading) return <div>Loading reviews...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return <div>Error: {error}</div>;
 
   return <ReviewsView reviews={reviews} />;

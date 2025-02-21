@@ -14,3 +14,6 @@ body {
   src: local("Poppins"),
     url(./assets/font/Poppins/Poppins-Regular.ttf) format("truetype");
 }
+.loading {
+  height: 100vh;
+}

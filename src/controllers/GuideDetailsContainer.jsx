@@ -12,7 +12,7 @@ const GuideDetailsContainer = () => {
 
   const { data: guide, loading, error } = useFetch(fetchGuide);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return <div>Error: {error}</div>;
 
   return <GuideDetailsView guide={guide} />;

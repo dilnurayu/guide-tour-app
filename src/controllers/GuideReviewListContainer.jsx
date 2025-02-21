@@ -19,7 +19,13 @@ const GuideReviewListContainer = () => {
       });
   }, []);
 
-  if (loading) return <div>Loading reviews...</div>;
+  if (loading)
+    return (
+      <div className="guide-review-list">
+        <h1>Reviews</h1>
+        <p style={{ marginTop: "15px" }}>Loading tours...</p>
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
 
   return <GuideReviewListView reviews={reviews} />;
