@@ -1,5 +1,5 @@
-import "./Header.css";
-import "./Modal.css";
+import "../views/style/Header.css";
+import "../views/style/Modal.css";
 
 // FormInput.jsx
 const FormInput = ({

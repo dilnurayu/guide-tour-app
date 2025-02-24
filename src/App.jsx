@@ -1,19 +1,12 @@
 import React, { useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Footer from "./skeleton/Footer";
-import Header from "./skeleton/Header";
 import Content from "./landing/Content";
 import LandingBlock from "./landing/LandingBlock";
 import StartJourney from "./components/StartJourney";
 import ScrollToTop from "./ScrollToTop";
 import { AuthProvider, AuthContext } from "./auth/AuthContext";
-
 import ToursListContainer from "./controllers/ToursListContainer";
 import GuidesListContainer from "./controllers/GuidesListContainer";
 import ProfileContainer from "./controllers/ProfileContainer";
@@ -24,6 +17,8 @@ import GuideToursContainer from "./controllers/GuideToursContainer";
 import GuideReviewsContainer from "./controllers/GuideReviewsContainer";
 import TourReviewsContainer from "./controllers/TourReviewsContainer";
 import GuideReviewListContainer from "./controllers/GuideReviewListContainer";
+import HeaderContainer from "./controllers/HeaderContainer";
+import NotificationContainer from "./controllers/NotificationContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -80,7 +75,16 @@ function AppRoutes() {
           </>
         }
       />
-
+      {user && user.role === "tourist" && (
+        <Route
+          path="/notifications"
+          element={
+            <>
+              <NotificationContainer />
+            </>
+          }
+        />
+      )}
       {user && user.role === "guide" && (
         <>
           <Route
@@ -89,6 +93,14 @@ function AppRoutes() {
               <>
                 <ProfileContainer />
                 {/* <FooterGuide /> */}
+              </>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <>
+                <NotificationContainer />
               </>
             }
           />
@@ -120,7 +132,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <ScrollToTop />
-        <Header />
+        <HeaderContainer />
         <AppRoutes />
       </AuthProvider>
     </BrowserRouter>

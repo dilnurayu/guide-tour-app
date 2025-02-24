@@ -58,11 +58,11 @@ const TourDetailsView = ({ tour }) => {
                 <p>Languages</p>
                 <span>{tour.languageIds.join(", ")}</span>
               </li>
+              <li>
+                <p>Price</p>
+                <span>${tour.price} / per person</span>
+              </li>
             </ul>
-            <div className="tour-about-button-wrapper">
-              <div></div>
-              <button>${tour.price} / per person</button>
-            </div>
           </div>
         </div>
         <div className="book-tour">
@@ -72,9 +72,6 @@ const TourDetailsView = ({ tour }) => {
               Ex optio sequi et quos praesentium in nostrum labore nam rerum
               iusto aut magni nesciunt? Quo quidem neque iste expedita est dolo.
             </p>
-            <input placeholder="Name" />
-            <input placeholder="Phone" />
-            <input placeholder="dd-mm-yy" />
             <input placeholder="Number of guests" />
             <input placeholder="Language" />
             <input placeholder="Message" />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { updateTour } from "../services/GuideToursService";
-import "../skeleton/Modal.css";
+import "./style/Modal.css";
 
 const EditTourForm = ({ tour, onClose, onSaved }) => {
   const formatDate = (dateString) =>

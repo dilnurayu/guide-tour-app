@@ -1,0 +1,48 @@
+.notification {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.notification-container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 20px;
+}
+.notification-wrapper {
+  display: flex;
+}
+.notification-wrapper img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+.notification-details {
+  margin-left: 20px;
+}
+.notification-message {
+  color: gray;
+}
+.notification-container button {
+  padding: 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  height: min-content;
+  margin: auto 0;
+  background-color: rgba(220, 125, 31, 1);
+  color: white;
+  cursor: pointer;
+}
+
+.notification-confirmed {
+  color: green;
+}

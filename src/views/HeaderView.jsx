@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import {
   FiMenu,
@@ -11,126 +11,25 @@ import {
   FiStar,
   FiCalendar,
 } from "react-icons/fi";
-import { AuthContext } from "../auth/AuthContext";
-import "./Header.css";
-import "./Modal.css";
 import logo from "../assets/UzGuide.png";
-import AuthForm from "./AuthComponents";
-import { parseJwt } from "../auth/jwtDecoder";
+import AuthForm from "../skeleton/AuthComponents";
+import "./style/Header.css";
+import { IoIosNotifications } from "react-icons/io";
 
-const INITIAL_FORM_STATE = {
-  name: "",
-  email: "",
-  password: "",
-  address_id: 0,
-  user_type: "",
-};
-
-const API_BASE_URL = "https://guide-tour-api.vercel.app/auth";
-
-const Header = () => {
-  const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
-  const [activeModal, setActiveModal] = useState(null);
-  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleInputChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleAuth = async (endpoint, data) => {
-    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const responseData = await response.json();
-    if (!response.ok) {
-      throw new Error(responseData.message || `${endpoint} failed`);
-    }
-    return responseData;
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const { email, password } = formData;
-      const data = await handleAuth("signin", { email, password });
-
-      localStorage.setItem("token", data.access_token);
-
-      const token = localStorage.getItem("token");
-      if (token) {
-        const decodedToken = parseJwt(token);
-        if (decodedToken && decodedToken.role) {
-          localStorage.setItem("userType", decodedToken.role);
-        }
-        setUser({
-          token,
-          role: decodedToken ? decodedToken.role : null,
-        });
-      }
-
-      closeModal();
-      navigate("/profile");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const data = await handleAuth("signup", formData);
-
-      localStorage.setItem("token", data.access_token);
-      localStorage.setItem("userType", formData.user_type);
-
-      setUser({
-        role: formData.user_type,
-        token: data.access_token,
-      });
-
-      closeModal();
-      navigate("/profile");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const openModal = (type) => {
-    setActiveModal(type);
-    setError("");
-    setFormData(INITIAL_FORM_STATE);
-
-    setMobileMenuOpen(false);
-  };
-
-  const closeModal = () => {
-    setActiveModal(null);
-    setError("");
-  };
+const HeaderView = ({
+  user,
+  activeModal,
+  formData,
+  error,
+  loading,
+  mobileMenuOpen,
+  setMobileMenuOpen,
+  handleInputChange,
+  handleLogin,
+  handleRegister,
+  openModal,
+  closeModal,
+}) => {
   const renderNavLinks = () => (
     <ul className="nav-links">
       {user?.role === "guide" ? (
@@ -224,6 +123,9 @@ const Header = () => {
           <div className="auth">
             {user ? (
               <div className="profile">
+                <Link to="/notifications">
+                  <IoIosNotifications size={25} color="gray" />
+                </Link>
                 <Link to="/profile">
                   <CgProfile size={25} color="gray" />
                 </Link>
@@ -257,10 +159,16 @@ const Header = () => {
             {renderMobileNavLinks()}
             <div className="mobile-auth">
               {user ? (
-                <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
-                  <CgProfile size={25} color="gray" />
-                  <span style={{ marginLeft: "8px" }}>Profile</span>
-                </Link>
+                <>
+                  <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
+                    <CgProfile size={25} color="gray" />
+                    <span style={{ marginLeft: "8px" }}>Profile</span>
+                  </Link>
+                  <Link to="/notifications">
+                    <IoIosNotifications size={25} color="gray" />
+                    <span style={{ marginLeft: "8px" }}>Notifications</span>
+                  </Link>
+                </>
               ) : (
                 <>
                   <a href="#login" onClick={() => openModal("login")}>
@@ -295,4 +203,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderView;
