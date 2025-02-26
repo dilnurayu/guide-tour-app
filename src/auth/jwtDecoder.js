@@ -1,4 +1,3 @@
-// jwtDecoder.js
 export function parseJwt(token) {
   try {
     const base64Url = token.split(".")[1];

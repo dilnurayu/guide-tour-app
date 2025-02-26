@@ -5,7 +5,12 @@ import image from "../assets/guide-details/image.png";
 import image1 from "../assets/guide-details/image-1.png";
 import image2 from "../assets/guide-details/image-2.png";
 
-const GuideDetailsView = ({ guide }) => {
+const GuideDetailsView = ({
+  guide,
+  bookingData,
+  onBookingInputChange,
+  onBookNow,
+}) => {
   const languages =
     guide.languages && guide.languages.length
       ? guide.languages.map((lang) => lang.name)
@@ -109,13 +114,34 @@ const GuideDetailsView = ({ guide }) => {
               Ex optio sequi et quos praesentium in nostrum labore nam rerum
               iusto aut magni nesciunt? Quo quidem neque iste expedita est dolo.
             </p>
-            <input placeholder="Name" />
-            <input placeholder="Phone" />
-            <input placeholder="dd-mm-yy" />
-            <input placeholder="Number of guests" />
-            <input placeholder="Language" />
-            <input placeholder="Message" />
-            <button className="book-btn">Book Now</button>
+            <input
+              placeholder="dd-mm-yy"
+              name="tour_date"
+              type="date"
+              value={bookingData.tour_date}
+              onChange={onBookingInputChange}
+            />
+            <input
+              placeholder="Reservation count"
+              name="reserve_count"
+              value={bookingData.reserve_count}
+              onChange={onBookingInputChange}
+            />
+            <input
+              placeholder="Language"
+              name="language_id"
+              value={bookingData.language_id}
+              onChange={onBookingInputChange}
+            />
+            <input
+              placeholder="Message"
+              name="message"
+              value={bookingData.message}
+              onChange={onBookingInputChange}
+            />
+            <button className="book-btn" onClick={onBookNow}>
+              Book Now
+            </button>
           </div>
         </div>
       </div>

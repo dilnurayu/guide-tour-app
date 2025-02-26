@@ -6,7 +6,7 @@ export interface Guide {
   price: number;
   priceType: string;
   resumeId: number;
-  userId: number;
+  guideId: number;
   rating: number;
   guideName: string;
 }
@@ -20,7 +20,7 @@ export function mapGuide(data: any): Guide {
     price: data.price || 0,
     priceType: data.price_type || "",
     resumeId: data.resume_id || 0,
-    userId: data.user_id || 0,
+    guideId: data.guide_id || 0,
     rating: data.rating || 0,
     guideName: data.guide_name || "",
   };

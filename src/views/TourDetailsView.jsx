@@ -2,7 +2,12 @@ import React from "react";
 import "./style/TourDetails.css";
 import image from "../assets/tour-image.png";
 
-const TourDetailsView = ({ tour }) => {
+const TourDetailsView = ({
+  tour,
+  bookingData,
+  onBookingInputChange,
+  onBookNow,
+}) => {
   const formattedDate = new Date(tour.date).toLocaleDateString();
 
   return (
@@ -72,10 +77,27 @@ const TourDetailsView = ({ tour }) => {
               Ex optio sequi et quos praesentium in nostrum labore nam rerum
               iusto aut magni nesciunt? Quo quidem neque iste expedita est dolo.
             </p>
-            <input placeholder="Number of guests" />
-            <input placeholder="Language" />
-            <input placeholder="Message" />
-            <button className="book-btn">Book Now</button>
+            <input
+              placeholder="Number of guests"
+              name="reserve_count"
+              value={bookingData.reserve_count}
+              onChange={onBookingInputChange}
+            />
+            <input
+              placeholder="Language"
+              name="language_id"
+              value={bookingData.language_id}
+              onChange={onBookingInputChange}
+            />
+            <input
+              placeholder="Message"
+              name="message"
+              value={bookingData.message}
+              onChange={onBookingInputChange}
+            />
+            <button className="book-btn" onClick={onBookNow}>
+              Book Now
+            </button>
           </div>
         </div>
       </div>
