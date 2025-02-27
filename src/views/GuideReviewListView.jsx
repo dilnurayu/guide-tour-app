@@ -1,6 +1,6 @@
 import React from "react";
 import "./style/GuideReviewList.css";
-import image from "../assets/guide-person.png";
+import image from "../assets/profile.png";
 
 const GuideReviewListView = ({ reviews }) => {
   return (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiFilter } from "react-icons/ci";
 import "./style/GuidesList.css";
-import guidePerson from "../assets/guide-person.png";
+import guidePerson from "../assets/profile.png";
 import renderStars from "../components/RenderStars";
 import GuideFiltersModal from "../components/GuideFiltersModal";
 

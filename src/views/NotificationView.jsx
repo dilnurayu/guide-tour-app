@@ -1,6 +1,6 @@
 import React from "react";
 import "./style/Notification.css";
-import guidePerson from "../assets/guide-person.png";
+import guidePerson from "../assets/profile.png";
 
 const NotificationView = ({
   userType,

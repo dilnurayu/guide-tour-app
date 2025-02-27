@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import guidePerson from "../assets/guide-person.png";
+import guidePerson from "../assets/profile.png";
 import { AuthContext } from "../auth/AuthContext";
 import "./style/Profile.css";
 

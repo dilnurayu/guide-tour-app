@@ -1,3 +1,4 @@
+// src/services/ReviewService.ts
 import { GuideReview, mapGuideReview } from "../models/GuideReview";
 import { mapTourReview, TourReview } from "../models/TourReview";
 import { fetchData } from "./api";
@@ -32,4 +33,60 @@ export async function fetchGuideResumeReviews(): Promise<GuideReview[]> {
   }
   const data = await response.json();
   return data.map(mapGuideReview);
+}
+
+// New functions to post reviews:
+
+export async function postGuideReview(review: {
+  resume_id: number;
+  title: string;
+  description: string;
+  rating: number;
+}): Promise<GuideReview> {
+  const token = localStorage.getItem("token");
+  const response = await fetch(
+    "https://guide-tour-api.vercel.app/reviews/resume",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(review),
+    }
+  );
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to post guide review");
+  }
+  const data = await response.json();
+  return mapGuideReview(data);
+}
+
+export async function postTourReview(review: {
+  tour_id: number;
+  title: string;
+  description: string;
+  rating: number;
+}): Promise<TourReview> {
+  const token = localStorage.getItem("token");
+  const response = await fetch(
+    "https://guide-tour-api.vercel.app/reviews/tour",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(review),
+    }
+  );
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to post tour review");
+  }
+  const data = await response.json();
+  return mapTourReview(data);
 }

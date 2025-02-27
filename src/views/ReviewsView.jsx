@@ -1,26 +1,49 @@
 import React from "react";
 import "./style/GuideReviews.css";
-import image from "../assets/guide-person.png";
+import image from "../assets/profile.png";
 
-const ReviewsView = ({ reviews }) => {
+const ReviewsView = ({
+  reviews,
+  reviewForm,
+  onReviewInputChange,
+  onSubmitReview,
+}) => {
   return (
     <div className="guide-reviews">
       <div className="line"></div>
-      <h3>Reviews {reviews.length}</h3>
-      <textarea placeholder="Write your review here" />
-      <div className="rate-comment">
-        <div className="rate">
-          <p>Rate:</p>
-          <div className="rating">
-            {[...Array(5)].map((_, i) => (
-              <span key={i} className="star">
-                &#9733;
-              </span>
-            ))}
+      <h3>Reviews ({reviews.length})</h3>
+
+      <div className="review-form">
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={reviewForm.title}
+          onChange={onReviewInputChange}
+        />
+        <textarea
+          name="description"
+          placeholder="Write your review here"
+          value={reviewForm.description}
+          onChange={onReviewInputChange}
+        />
+        <div className="rate-comment">
+          <div className="rate">
+            <p>Rate:</p>
+            <input
+              type="number"
+              name="rating"
+              min="0"
+              max="5"
+              value={reviewForm.rating}
+              onChange={onReviewInputChange}
+            />
           </div>
+          <button onClick={onSubmitReview}>Comment</button>
         </div>
-        <button>Comment</button>
       </div>
+
+      {/* Reviews List */}
       <div className="reviews-list">
         {reviews.length > 0 ? (
           reviews.map((review) => (

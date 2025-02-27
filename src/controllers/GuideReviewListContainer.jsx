@@ -23,7 +23,7 @@ const GuideReviewListContainer = () => {
     return (
       <div className="guide-review-list">
         <h1>Reviews</h1>
-        <p style={{ marginTop: "15px" }}>Loading tours...</p>
+        <p style={{ marginTop: "15px" }}>Loading reviews...</p>
       </div>
     );
   if (error) return <div>Error: {error}</div>;

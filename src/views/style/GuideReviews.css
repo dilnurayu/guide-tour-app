@@ -7,6 +7,14 @@ h4 {
   margin: 20px auto;
 }
 
+.guide-reviews input {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px gainsboro solid;
+  border-radius: 20px;
+  width: -webkit-fill-available;
+}
+
 .guide-reviews textarea {
   margin-top: 20px;
   padding: 20px;
