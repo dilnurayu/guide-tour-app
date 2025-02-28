@@ -14,12 +14,14 @@ const GuideDetailsView = ({
   const languages =
     guide.languages && guide.languages.length
       ? guide.languages.map((lang) => lang.name)
-      : ["English", "Spanish", "French"];
+      : ["No languages available"];
 
   const regions =
     guide.addresses && guide.addresses.length
-      ? guide.addresses.map((addr) => `Region ${addr.region_id}`)
-      : ["Europe", "South America", "Asia"];
+      ? guide.addresses.map(
+          (addr) => `${addr.region.region}, ${addr.city.city}`
+        )
+      : ["No regions available"];
 
   const rating = Math.round(guide.rating) || 0;
 

@@ -11,7 +11,6 @@ const TourReviewsContainer = () => {
   const [error, setError] = useState(null);
 
   const [reviewForm, setReviewForm] = useState({
-    title: "",
     description: "",
     rating: 0,
   });
@@ -49,12 +48,11 @@ const TourReviewsContainer = () => {
     try {
       await postTourReview({
         tour_id: tourId,
-        title: reviewForm.title,
         description: reviewForm.description,
         rating: reviewForm.rating,
       });
       alert("Review submitted successfully!");
-      setReviewForm({ title: "", description: "", rating: 0 });
+      setReviewForm({ description: "", rating: 0 });
       loadReviews();
     } catch (err) {
       alert("Failed to submit review: " + err.message);

@@ -1,6 +1,8 @@
+import { AuthData } from "./authModel";
+
 export interface TourReview {
   tourId: number;
-  title: string;
+  tourist: AuthData;
   description: string;
   rating: number;
   reviewId: number;
@@ -9,8 +11,8 @@ export interface TourReview {
 export function mapTourReview(data: any): TourReview {
   return {
     tourId: data.tour_id,
-    title: data.title,
     description: data.description,
+    tourist: data.tourist,
     rating: data.rating,
     reviewId: data.tour_review_id,
   };

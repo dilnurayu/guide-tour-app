@@ -1,6 +1,8 @@
+import { AuthData } from "./authModel";
+
 export interface GuideReview {
   resumeId: number;
-  title: string;
+  tourist: AuthData;
   description: string;
   rating: number;
   reviewId: number;
@@ -9,7 +11,7 @@ export interface GuideReview {
 export function mapGuideReview(data: any): GuideReview {
   return {
     resumeId: data.resume_id,
-    title: data.title,
+    tourist: data.tourist,
     description: data.description,
     rating: data.rating,
     reviewId: data.review_id,

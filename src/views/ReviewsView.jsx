@@ -14,13 +14,6 @@ const ReviewsView = ({
       <h3>Reviews ({reviews.length})</h3>
 
       <div className="review-form">
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={reviewForm.title}
-          onChange={onReviewInputChange}
-        />
         <textarea
           name="description"
           placeholder="Write your review here"
@@ -50,7 +43,7 @@ const ReviewsView = ({
             <div key={review.reviewId} className="reviews-container">
               <img src={image} alt="guide" />
               <div>
-                <h4>{review.title}</h4>
+                <h4>{review.tourist.name}</h4>
                 <p>{review.description}</p>
                 <span>
                   <span className="star">

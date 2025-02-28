@@ -11,7 +11,7 @@ const GuideReviewListView = ({ reviews }) => {
           <img src={image} alt="Reviewer" />
           <div className="review-wrapper">
             <div className="name-date-review">
-              <h4>{review.title}</h4>
+              <h4>{review.tourist.name}</h4>
               <h5>12.03.2024</h5>
             </div>
             <p>{review.description}</p>
