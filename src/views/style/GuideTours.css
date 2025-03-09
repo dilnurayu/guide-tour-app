@@ -31,10 +31,9 @@
   justify-content: space-between;
 }
 
-.guide-tour-container button {
+.guide-tour-container .button {
   margin: auto 0;
   width: fit-content;
-  height: 55px;
   background-color: #ff7b1a;
   color: white;
   border: none;
@@ -46,6 +45,6 @@
   transition: background 0.3s ease;
 }
 
-.guide-tour-container button:hover {
+.guide-tour-container .button:hover {
   background-color: #e96a00;
 }

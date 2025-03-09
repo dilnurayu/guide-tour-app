@@ -29,6 +29,7 @@ const HeaderView = ({
   handleRegister,
   openModal,
   closeModal,
+  addressOptions,
 }) => {
   const renderNavLinks = () => (
     <ul className="nav-links">
@@ -190,6 +191,7 @@ const HeaderView = ({
             {error && <div className="error-message">{error}</div>}
             <h2>{activeModal === "login" ? "Login" : "Register"}</h2>
             <AuthForm
+              addressOptions={addressOptions}
               type={activeModal}
               formData={formData}
               onChange={handleInputChange}

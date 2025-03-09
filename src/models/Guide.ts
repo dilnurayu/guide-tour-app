@@ -9,6 +9,7 @@ export interface Guide {
   guideId: number;
   rating: number;
   guideName: string;
+  tourPhotos: string[];
 }
 
 export function mapGuide(data: any): Guide {
@@ -23,5 +24,6 @@ export function mapGuide(data: any): Guide {
     guideId: data.guide_id || 0,
     rating: data.rating || 0,
     guideName: data.guide_name || "",
+    tourPhotos: Array.isArray(data.tour_photos) ? data.tour_photos : [],
   };
 }

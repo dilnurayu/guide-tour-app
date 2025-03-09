@@ -1,9 +1,6 @@
 import React from "react";
 import "./style/GuideDetails.css";
 import guidePerson from "../assets/profile.png";
-import image from "../assets/guide-details/image.png";
-import image1 from "../assets/guide-details/image-1.png";
-import image2 from "../assets/guide-details/image-2.png";
 
 const GuideDetailsView = ({
   guide,
@@ -72,42 +69,32 @@ const GuideDetailsView = ({
       </div>
       <div className="bottom-profile-wrapper">
         <div className="profile-gallery">
-          <div className="profile-gallery-wrapper">
-            <h2>From {guide.guideName}'s gallery</h2>
-            <p>
-              Ex optio sequi et quos praesentium in nostrum labore nam rerum
-              iusto aut magni nesciunt? Quo quidem neque iste expedita est dolor
-              similique ut quasi maxime ut deserunt autem At praesentium
-              voluptatem aut libero nisi.
-            </p>
-            <div className="w-full max-w-4xl mx-auto p-4">
-              <div className="grid grid-cols-2 gap-4 photo-grid">
-                <div className="relative aspect-square">
-                  <img
-                    src={image}
-                    alt="Large photo"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-                <div className="grid grid-rows-2 gap-4">
-                  <div className="relative aspect-square">
-                    <img
-                      src={image1}
-                      alt="Top right photo"
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+          {guide.tourPhotos && guide.tourPhotos.length > 0 && (
+            <div className="profile-gallery-wrapper">
+              <h2>From {guide.guideName}&apos;s gallery</h2>
+              <p>
+                Ex optio sequi et quos praesentium in nostrum labore nam rerum
+                iusto aut magni nesciunt? Quo quidem neque iste expedita est
+                dolor similique ut quasi maxime ut deserunt autem At praesentium
+                voluptatem aut libero nisi.
+              </p>
+              <div className="photo-container">
+                <div className="photo-container-wrapper">
+                  <div className="main-photo">
+                    <img src={guide.tourPhotos[0]} alt="Large photo" />
                   </div>
-                  <div className="relative aspect-square">
-                    <img
-                      src={image2}
-                      alt="Bottom right photo"
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+                  <div className="photo-container-right">
+                    <div className="right-photo-container">
+                      <img src={guide.tourPhotos[1]} alt="Top right photo" />
+                    </div>
+                    <div className="right-photo-container">
+                      <img src={guide.tourPhotos[2]} alt="Bottom right photo" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="book-guide">
           <div className="book-guide-wrapper">

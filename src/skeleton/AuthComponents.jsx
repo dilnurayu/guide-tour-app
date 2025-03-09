@@ -40,7 +40,14 @@ const UserTypeSelect = ({ value, onChange }) => (
 );
 
 // AuthForm.jsx
-const AuthForm = ({ type, formData, onChange, onSubmit, loading }) => {
+const AuthForm = ({
+  type,
+  formData,
+  onChange,
+  onSubmit,
+  loading,
+  addressOptions,
+}) => {
   const isLogin = type === "login";
 
   return (
@@ -54,13 +61,19 @@ const AuthForm = ({ type, formData, onChange, onSubmit, loading }) => {
             onChange={onChange}
             placeholder="Full Name"
           />
-          <FormInput
-            type="number"
+          <select
             name="address_id"
             value={formData.address_id}
             onChange={onChange}
-            placeholder="Address"
-          />
+            className="form-input"
+          >
+            <option value="">Select Region</option>
+            {addressOptions.map((addr) => (
+              <option key={addr.address_id} value={addr.address_id}>
+                {addr.region.region} - {addr.city.city}
+              </option>
+            ))}
+          </select>
         </>
       )}
       <FormInput

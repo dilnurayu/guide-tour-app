@@ -94,11 +94,6 @@
   line-height: 1.6;
 }
 
-.photo-grid {
-  display: flex;
-  gap: 10px;
-}
-
 .bottom-profile-wrapper {
   display: flex;
 }

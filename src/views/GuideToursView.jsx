@@ -1,5 +1,6 @@
 import React from "react";
 import "./style//GuideTours.css";
+import { Link } from "react-router-dom";
 
 const GuideToursView = ({ tours }) => {
   return (
@@ -28,7 +29,9 @@ const GuideToursView = ({ tours }) => {
                   ))}
                 </div>
               </div>
-              <button>Choose</button>
+              <Link to={`/destinations/${tour.tourId}`} className="button">
+                Choose
+              </Link>
             </div>
           ))
         ) : (

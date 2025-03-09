@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContext";
 import HeaderView from "../views/HeaderView";
@@ -15,6 +15,15 @@ const HeaderContainer = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [addressOptions, setAddressOptions] = useState([]);
+
+  useEffect(() => {
+    fetch("https://guide-tour-api.vercel.app/addresses")
+      .then((res) => res.json())
+      .then((data) => setAddressOptions(data))
+      .catch((err) => console.error("Error fetching addresses:", err));
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData((prev) => ({
@@ -102,6 +111,7 @@ const HeaderContainer = () => {
       handleRegister={handleRegister}
       openModal={openModal}
       closeModal={closeModal}
+      addressOptions={addressOptions}
     />
   );
 };

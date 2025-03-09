@@ -15,7 +15,11 @@ const NotificationView = ({
   }
 
   if (error) {
-    return <div className="notification-error">Error: {error}</div>;
+    return (
+      <div className="notification">
+        <h1>Notifications Not Found</h1>
+      </div>
+    );
   }
 
   if (userType === "guide") {

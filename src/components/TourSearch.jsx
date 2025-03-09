@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import guideListHeader from "../assets/guide-list-header.jpg";
 import perfectTourImg from "../assets/perfect-tour.png";
 
@@ -9,6 +9,14 @@ const TourSearch = ({ filters, setFilters }) => {
     person: "",
     payment: "",
   });
+  const [addressOptions, setAddressOptions] = useState([]);
+
+  useEffect(() => {
+    fetch("https://guide-tour-api.vercel.app/addresses")
+      .then((res) => res.json())
+      .then((data) => setAddressOptions(data))
+      .catch((err) => console.error("Error fetching addresses:", err));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +26,9 @@ const TourSearch = ({ filters, setFilters }) => {
   const handleSearch = () => {
     const newFilters = {
       ...filters,
-      region_ids: localFilters.region ? [localFilters.region] : undefined,
+      region_ids: localFilters.region
+        ? [parseInt(localFilters.region)]
+        : undefined,
       date_from: localFilters.date || undefined,
       payment_type: localFilters.payment || undefined,
       min_guest_count: localFilters.person || undefined,
@@ -45,14 +55,19 @@ const TourSearch = ({ filters, setFilters }) => {
           <div className="filter-row">
             <div className="filter-item">
               <p>Region</p>
-              <input
-                type="text"
+              <select
                 name="region"
-                placeholder="Bukhara"
                 value={localFilters.region}
                 onChange={handleChange}
                 className="region-input"
-              />
+              >
+                <option value="">Select Region</option>
+                {addressOptions.map((addr) => (
+                  <option key={addr.address_id} value={addr.address_id}>
+                    {addr.region.region} - {addr.city.city}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="filter-item">
               <p>Date</p>

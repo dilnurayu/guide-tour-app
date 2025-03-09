@@ -26,41 +26,53 @@ const ProfileContainer = () => {
   const [hasResume, setHasResume] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  const [addressOptions, setAddressOptions] = useState([]);
+  const [languageOptions, setLanguageOptions] = useState([]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [profile, resume] = await Promise.all([
-          getProfile(),
-          getResume(),
-        ]);
-        setProfileData(profile);
-        if (resume) {
-          const resumeData = {
-            bio: resume.bio || "",
-            experience_start_date: resume.experience_start_date
-              ? resume.experience_start_date.split("T")[0]
-              : "",
-            languages: resume.languages
-              ? resume.languages.map((l) => l.name)
-              : [],
-            addresses: resume.addresses
-              ? resume.addresses.map((a) => a.address_id)
-              : [],
-            price: resume.price || 0,
-            price_type: resume.price_type || "",
-          };
-          setFormData(resumeData);
-          setOriginalFormData(resumeData);
-          setHasResume(true);
-          setEditMode(false);
-        } else {
-          setHasResume(false);
-          setEditMode(true);
-        }
-      } catch (err) {
-        console.error("Error fetching data:", err);
+    fetch("https://guide-tour-api.vercel.app/languages")
+      .then((res) => res.json())
+      .then((data) => setLanguageOptions(data))
+      .catch((err) => console.error("Error fetching languages:", err));
+    fetch("https://guide-tour-api.vercel.app/addresses")
+      .then((res) => res.json())
+      .then((data) => setAddressOptions(data))
+      .catch((err) => console.error("Error fetching addresses:", err));
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [profile, resume] = await Promise.all([getProfile(), getResume()]);
+      setProfileData(profile);
+      if (resume) {
+        const resumeData = {
+          bio: resume.bio || "",
+          experience_start_date: resume.experience_start_date
+            ? resume.experience_start_date.split("T")[0]
+            : "",
+          languages: resume.languages
+            ? resume.languages.map((l) => l.name)
+            : [],
+          addresses: resume.addresses
+            ? resume.addresses.map((a) => a.address_id)
+            : [],
+          price: resume.price || 0,
+          price_type: resume.price_type || "",
+        };
+        setFormData(resumeData);
+        setOriginalFormData(resumeData);
+        setHasResume(true);
+        setEditMode(false);
+      } else {
+        setHasResume(false);
+        setEditMode(true);
       }
-    };
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -70,7 +82,9 @@ const ProfileContainer = () => {
       ...prev,
       [name]:
         name === "languages" || name === "addresses"
-          ? value.split(",").map((v) => v.trim())
+          ? Array.isArray(value)
+            ? value
+            : value.split(",").map((v) => v.trim())
           : name === "price"
           ? Number(value)
           : value,
@@ -85,9 +99,11 @@ const ProfileContainer = () => {
       if (!hasResume) {
         resume = await createResume(formData);
         alert("Resume created successfully!");
+        fetchData();
       } else {
         resume = await editResume(formData);
         alert("Resume updated successfully!");
+        fetchData();
       }
       const resumeData = {
         bio: resume.bio || "",
@@ -129,6 +145,8 @@ const ProfileContainer = () => {
       setEditMode={setEditMode}
       handleCancel={handleCancel}
       hasResume={hasResume}
+      languageOptions={languageOptions}
+      addressOptions={addressOptions}
     />
   );
 };

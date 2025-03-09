@@ -46,9 +46,13 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 5px;
 }
-
+.modal-content select {
+  padding: 6px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 .modal-actions {
   display: flex;
   justify-content: flex-end;

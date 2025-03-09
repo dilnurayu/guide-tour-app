@@ -14,6 +14,8 @@ const ProfileView = ({
   setEditMode,
   handleCancel,
   hasResume,
+  languageOptions,
+  addressOptions,
 }) => {
   const { logout } = useContext(AuthContext);
 
@@ -24,7 +26,6 @@ const ProfileView = ({
         <div className="profile-image">
           <div className="profile-image-wrapper">
             <img src={guidePerson} alt="Profile" />
-            <button className="delete">Delete</button>
             <button className="logout" onClick={logout}>
               Logout
             </button>
@@ -47,20 +48,38 @@ const ProfileView = ({
                 <p>Languages:</p>
                 <span>
                   {editMode ? (
-                    <input
+                    <select
                       name="languages"
-                      value={
-                        Array.isArray(formData.languages)
-                          ? formData.languages.join(",")
-                          : ""
-                      }
-                      onChange={handleInputChange}
-                      placeholder="Add languages (comma-separated)"
-                    />
-                  ) : Array.isArray(formData.languages) ? (
-                    formData.languages.join(", ")
+                      value={formData.languages}
+                      multiple
+                      onChange={(e) => {
+                        const selectedValues = Array.from(
+                          e.target.selectedOptions,
+                          (option) => option.value
+                        );
+                        handleInputChange({
+                          target: { name: "languages", value: selectedValues },
+                        });
+                      }}
+                      className="form-input"
+                    >
+                      {languageOptions.map((lang) => (
+                        <option key={lang.language_id} value={lang.language_id}>
+                          {lang.name}
+                        </option>
+                      ))}
+                    </select>
+                  ) : languageOptions.length > 0 ? (
+                    formData.languages
+                      .map((id) => {
+                        const language = languageOptions.find(
+                          (lang) => lang.language_id === id
+                        );
+                        return language ? language.name : id;
+                      })
+                      .join(", ")
                   ) : (
-                    ""
+                    formData.languages.join(", ")
                   )}
                 </span>
               </li>
@@ -68,12 +87,38 @@ const ProfileView = ({
                 <p>Regions:</p>
                 <span>
                   {editMode ? (
-                    <input
+                    <select
                       name="addresses"
-                      value={formData.addresses.join(",")}
-                      onChange={handleInputChange}
-                      placeholder="Add regions (comma-separated)"
-                    />
+                      value={formData.addresses}
+                      multiple
+                      onChange={(e) => {
+                        const selectedValues = Array.from(
+                          e.target.selectedOptions,
+                          (option) => option.value
+                        );
+                        handleInputChange({
+                          target: { name: "addresses", value: selectedValues },
+                        });
+                      }}
+                      className="form-input"
+                    >
+                      {addressOptions.map((addr) => (
+                        <option key={addr.address_id} value={addr.address_id}>
+                          {addr.region.region} - {addr.city.city}
+                        </option>
+                      ))}
+                    </select>
+                  ) : addressOptions.length > 0 ? (
+                    formData.addresses
+                      .map((id) => {
+                        const address = addressOptions.find(
+                          (addr) => addr.address_id === id
+                        );
+                        return address
+                          ? `${address.region.region} - ${address.city.city}`
+                          : id;
+                      })
+                      .join(", ")
                   ) : (
                     formData.addresses.join(", ")
                   )}

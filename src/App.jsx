@@ -19,6 +19,7 @@ import TourReviewsContainer from "./controllers/TourReviewsContainer";
 import GuideReviewListContainer from "./controllers/GuideReviewListContainer";
 import HeaderContainer from "./controllers/HeaderContainer";
 import NotificationContainer from "./controllers/NotificationContainer";
+import TouristProfileContainer from "./controllers/TouristProfileContainer";
 
 function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -76,14 +77,25 @@ function AppRoutes() {
         }
       />
       {user && user.role === "tourist" && (
-        <Route
-          path="/notifications"
-          element={
-            <>
-              <NotificationContainer />
-            </>
-          }
-        />
+        <>
+          <Route
+            path="/profile"
+            element={
+              <>
+                <TouristProfileContainer />
+                {/* <FooterGuide /> */}
+              </>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <>
+                <NotificationContainer />
+              </>
+            }
+          />
+        </>
       )}
       {user && user.role === "guide" && (
         <>

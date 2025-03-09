@@ -112,6 +112,47 @@
   gap: 10px;
 }
 
+.photo-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.photo-container-wrapper {
+  display: flex;
+  gap: 4px;
+  height: 500px;
+}
+
+.main-photo {
+  flex: 2;
+  overflow: hidden;
+}
+
+.main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-container-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.right-photo-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.right-photo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .book-guide {
   width: 30%;
   text-align: center;
