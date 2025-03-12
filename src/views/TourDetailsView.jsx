@@ -16,15 +16,15 @@ const TourDetailsView = ({
         <div className="tour-about">
           <div className="tour-about-wrapper">
             <h1>{tour.title}</h1>
-            <h5>{tour.duration} hours</h5>
-            <div className="rating">
+            <h5>Duration: {tour.duration} hours</h5>
+            {/* <div className="rating">
               {[...Array(5)].map((_, i) => (
                 <span key={i} className="star">
                   &#9733;
                 </span>
               ))}
               <span>(2.3k review)</span>
-            </div>
+            </div> */}
             <p>{tour.about}</p>
             <ul>
               <li>
