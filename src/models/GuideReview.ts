@@ -6,6 +6,7 @@ export interface GuideReview {
   description: string;
   rating: number;
   reviewId: number;
+  createdAt: string;
 }
 
 export function mapGuideReview(data: any): GuideReview {
@@ -15,5 +16,6 @@ export function mapGuideReview(data: any): GuideReview {
     description: data.description,
     rating: data.rating,
     reviewId: data.review_id,
+    createdAt: data.created_at,
   };
 }

@@ -6,6 +6,7 @@ export interface TourReview {
   description: string;
   rating: number;
   reviewId: number;
+  createdAt: string;
 }
 
 export function mapTourReview(data: any): TourReview {
@@ -15,5 +16,6 @@ export function mapTourReview(data: any): TourReview {
     tourist: data.tourist,
     rating: data.rating,
     reviewId: data.tour_review_id,
+    createdAt: data.created_at,
   };
 }

@@ -42,7 +42,8 @@ const GuideToursListView = ({
         <div className="guide-tour-list-left">
           <h3>{tour.title}</h3>
           <p>
-            {tour.duration} Hours | Languages: {tour.languageIds.join(", ")}
+            {tour.duration} Hours | Languages:{" "}
+            {tour.languages.map((lang) => lang.name).join(", ")}
           </p>
           <p>
             Price: ${tour.price} / {tour.priceType}
