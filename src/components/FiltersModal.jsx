@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FiltersModal.css";
 
 const FiltersModal = ({ initialFilters, onApply, onClose }) => {
@@ -12,19 +12,28 @@ const FiltersModal = ({ initialFilters, onApply, onClose }) => {
     }));
   };
 
+  const [addressOptions, setAddressOptions] = useState([]);
+  const [languageOptions, setLanguageOptions] = useState([]);
+
+  useEffect(() => {
+    fetch("https://guide-tour-api.vercel.app/addresses")
+      .then((res) => res.json())
+      .then((data) => setAddressOptions(data))
+      .catch((err) => console.error("Error fetching addresses: ", err));
+
+    fetch("https://guide-tour-api.vercel.app/languages")
+      .then((res) => res.json())
+      .then((data) => setLanguageOptions(data))
+      .catch((err) => console.error("Error fetching languages: ", err));
+  }, []);
+
   const handleApply = () => {
     const parsedFilters = { ...filters };
-    if (parsedFilters.region_ids) {
-      parsedFilters.region_ids = parsedFilters.region_ids
-        .split(",")
-        .map((val) => parseInt(val.trim()))
-        .filter((val) => !isNaN(val));
-    }
     if (parsedFilters.language_ids) {
-      parsedFilters.language_ids = parsedFilters.language_ids
-        .split(",")
-        .map((val) => parseInt(val.trim()))
-        .filter((val) => !isNaN(val));
+      parsedFilters.language_ids = [parseInt(parsedFilters.language_ids, 10)];
+    }
+    if (parsedFilters.region_ids) {
+      parsedFilters.region_ids = [parseInt(parsedFilters.region_ids, 10)];
     }
     onApply(parsedFilters);
     onClose();
@@ -71,7 +80,7 @@ const FiltersModal = ({ initialFilters, onApply, onClose }) => {
               onChange={handleChange}
             />
           </label>
-          <label>
+          {/* <label>
             Guide ID:
             <input
               type="number"
@@ -79,24 +88,36 @@ const FiltersModal = ({ initialFilters, onApply, onClose }) => {
               value={filters.guide_id || ""}
               onChange={handleChange}
             />
-          </label>
+          </label> */}
           <label>
-            Region IDs (comma-separated):
-            <input
-              type="text"
-              name="region_ids"
-              value={filters.region_ids || ""}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Language IDs (comma-separated):
-            <input
-              type="text"
+            Language:
+            <select
               name="language_ids"
               value={filters.language_ids || ""}
               onChange={handleChange}
-            />
+            >
+              <option value="">Select Language</option>
+              {languageOptions.map((lang) => (
+                <option key={lang.language_id} value={lang.language_id}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Address (Region):
+            <select
+              name="address_ids"
+              value={filters.address_ids || ""}
+              onChange={handleChange}
+            >
+              <option value="">Select Address</option>
+              {addressOptions.map((addr) => (
+                <option key={addr.address_id} value={addr.address_id}>
+                  {addr.region.region} - {addr.city.city}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Min Rating:

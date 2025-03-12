@@ -27,8 +27,6 @@ const GuideFiltersModal = ({ initialFilters, onApply, onClose }) => {
   };
 
   const handleApply = () => {
-    // No need to split comma-separated values anymore;
-    // simply pass the selected value (converted to number) inside an array if desired.
     const parsedFilters = { ...filters };
     if (parsedFilters.language_ids) {
       parsedFilters.language_ids = [parseInt(parsedFilters.language_ids, 10)];
