@@ -16,9 +16,8 @@ const EditTourForm = ({
     title: tour.title,
     about: tour.about,
     guestCount: tour.guestCount,
-    // Convert languageIds and destinationIds to arrays of strings for the multi-select
-    languageIds: tour.languageIds.map(String),
-    destinationIds: tour.destinationIds.map(String),
+    languageIds: tour.languages.map((lang) => String(lang.language_id)),
+    destinationIds: tour.addresses.map((addr) => String(addr.address_id)),
     date: formatDate(tour.date),
     duration: tour.duration,
     priceType: tour.priceType,
@@ -38,7 +37,6 @@ const EditTourForm = ({
   const handleChange = (e) => {
     const { name, value, multiple, options } = e.target;
     if (multiple) {
-      // For multi-select, get all selected option values
       const selectedValues = Array.from(options)
         .filter((option) => option.selected)
         .map((option) => option.value);
