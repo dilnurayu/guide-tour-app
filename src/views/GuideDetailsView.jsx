@@ -116,12 +116,20 @@ const GuideDetailsView = ({
               value={bookingData.reserve_count}
               onChange={onBookingInputChange}
             />
-            <input
-              placeholder="Language"
+            <select
               name="language_id"
               value={bookingData.language_id}
               onChange={onBookingInputChange}
-            />
+            >
+              <option value="">Select a language</option>
+              {guide.languages &&
+                guide.languages.length > 0 &&
+                guide.languages.map((lang) => (
+                  <option key={lang.language_id} value={lang.language_id}>
+                    {lang.name}
+                  </option>
+                ))}
+            </select>
             <input
               placeholder="Message"
               name="message"

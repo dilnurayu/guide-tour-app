@@ -14,8 +14,8 @@ export interface Tour {
   photoGallery: string[];
   about: string;
   tourId: number;
-  destinationIds: number[];
-  languageIds: number[];
+  addresses: number[];
+  languages: number[];
   averageRating: number[];
 }
 
@@ -36,8 +36,8 @@ export function mapTour(data: any): Tour {
     photoGallery: data.photo_gallery,
     about: data.about,
     tourId: data.tour_id,
-    destinationIds: data.destination_ids,
-    languageIds: data.language_ids,
+    addresses: data.addresses,
+    languages: data.languages,
     averageRating: data.average_rating,
   };
 }

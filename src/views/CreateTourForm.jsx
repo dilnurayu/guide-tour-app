@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { createTour } from "../services/GuideToursService";
 import "./style/Modal.css";
-const CreateTourForm = ({ onClose, onCreated }) => {
+
+const CreateTourForm = ({
+  onClose,
+  onCreated,
+  languageOptions,
+  destinationOptions,
+}) => {
   const [formData, setFormData] = useState({
     title: "",
     about: "",
     guestCount: "",
-    languageIds: "",
-    destinationIds: "",
+    languageIds: [], // initially an array
+    destinationIds: [], // initially an array
     date: "",
     duration: "",
     priceType: "per person",
@@ -25,11 +31,22 @@ const CreateTourForm = ({ onClose, onCreated }) => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, multiple, options } = e.target;
+    if (multiple) {
+      // If this is a multi-select, convert selected options to an array of values.
+      const selectedValues = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: selectedValues,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -57,12 +74,8 @@ const CreateTourForm = ({ onClose, onCreated }) => {
       not_included: formData.notIncluded,
       included: formData.included,
       about: formData.about,
-      destination_ids: formData.destinationIds
-        .split(",")
-        .map((id) => Number(id.trim())),
-      language_ids: formData.languageIds
-        .split(",")
-        .map((id) => Number(id.trim())),
+      destination_ids: formData.destinationIds.map((id) => Number(id)),
+      language_ids: formData.languageIds.map((id) => Number(id)),
     };
 
     const requestData = new FormData();
@@ -106,7 +119,7 @@ const CreateTourForm = ({ onClose, onCreated }) => {
               name="about"
               value={formData.about}
               onChange={handleChange}
-              placeholder="Tour Title"
+              placeholder="About the Tour"
               required
             />
           </div>
@@ -125,26 +138,38 @@ const CreateTourForm = ({ onClose, onCreated }) => {
 
           <div className="form-group">
             <label>Language:</label>
-            <input
-              type="text"
+            <select
               name="languageIds"
               value={formData.languageIds}
+              multiple
               onChange={handleChange}
-              placeholder="e.g., 1,2"
               required
-            />
+            >
+              {languageOptions &&
+                languageOptions.map((lang) => (
+                  <option key={lang.language_id} value={lang.language_id}>
+                    {lang.name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <div className="form-group">
             <label>Destination:</label>
-            <input
-              type="text"
+            <select
               name="destinationIds"
               value={formData.destinationIds}
+              multiple
               onChange={handleChange}
-              placeholder="e.g., 2,3"
               required
-            />
+            >
+              {destinationOptions &&
+                destinationOptions.map((dest) => (
+                  <option key={dest.address_id} value={dest.address_id}>
+                    {dest.region.region} - {dest.city.city}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <div className="form-group">
@@ -159,7 +184,7 @@ const CreateTourForm = ({ onClose, onCreated }) => {
           </div>
 
           <div className="form-group">
-            <label>Duration (days):</label>
+            <label>Duration (hours):</label>
             <input
               type="number"
               name="duration"

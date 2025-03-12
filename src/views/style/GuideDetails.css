@@ -180,6 +180,12 @@
   border: none;
   border-radius: 10px;
 }
+.book-guide-wrapper select {
+  width: 100%;
+  padding: 15px 10px;
+  border: none;
+  border-radius: 10px;
+}
 
 .book-guide-wrapper button {
   margin: 20px auto 0;

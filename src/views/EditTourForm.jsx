@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { updateTour } from "../services/GuideToursService";
 import "./style/Modal.css";
 
-const EditTourForm = ({ tour, onClose, onSaved }) => {
+const EditTourForm = ({
+  tour,
+  onClose,
+  onSaved,
+  languageOptions,
+  destinationOptions,
+}) => {
   const formatDate = (dateString) =>
     dateString ? dateString.split("T")[0] : "";
 
@@ -10,8 +16,9 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
     title: tour.title,
     about: tour.about,
     guestCount: tour.guestCount,
-    languageIds: tour.languageIds.join(", "),
-    destinationIds: tour.destinationIds.join(", "),
+    // Convert languageIds and destinationIds to arrays of strings for the multi-select
+    languageIds: tour.languageIds.map(String),
+    destinationIds: tour.destinationIds.map(String),
     date: formatDate(tour.date),
     duration: tour.duration,
     priceType: tour.priceType,
@@ -29,18 +36,17 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, multiple, options } = e.target;
+    if (multiple) {
+      // For multi-select, get all selected option values
+      const selectedValues = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+      setFormData((prev) => ({ ...prev, [name]: selectedValues }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
-
-  //   const handleFileChange = (e) => {
-  //     if (e.target.files && e.target.files.length > 0) {
-  //       setPhotos(Array.from(e.target.files));
-  //     }
-  //   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,12 +67,8 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
       not_included: formData.notIncluded,
       included: formData.included,
       about: formData.about,
-      destination_ids: formData.destinationIds
-        .split(",")
-        .map((id) => Number(id.trim())),
-      language_ids: formData.languageIds
-        .split(",")
-        .map((id) => Number(id.trim())),
+      destination_ids: formData.destinationIds.map((id) => Number(id)),
+      language_ids: formData.languageIds.map((id) => Number(id)),
     };
 
     const requestData = new FormData();
@@ -126,25 +128,37 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
           </div>
           <div className="form-group">
             <label>Language:</label>
-            <input
-              type="text"
+            <select
               name="languageIds"
               value={formData.languageIds}
+              multiple
               onChange={handleChange}
-              placeholder="e.g., 1,2"
               required
-            />
+            >
+              {languageOptions &&
+                languageOptions.map((lang) => (
+                  <option key={lang.language_id} value={lang.language_id}>
+                    {lang.name}
+                  </option>
+                ))}
+            </select>
           </div>
           <div className="form-group">
             <label>Destination:</label>
-            <input
-              type="text"
+            <select
               name="destinationIds"
               value={formData.destinationIds}
+              multiple
               onChange={handleChange}
-              placeholder="e.g., 2,3"
               required
-            />
+            >
+              {destinationOptions &&
+                destinationOptions.map((dest) => (
+                  <option key={dest.address_id} value={dest.address_id}>
+                    {dest.region.region} - {dest.city.city}
+                  </option>
+                ))}
+            </select>
           </div>
           <div className="form-group">
             <label>Date:</label>
@@ -157,7 +171,7 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
             />
           </div>
           <div className="form-group">
-            <label>Duration (days):</label>
+            <label>Duration (hours):</label>
             <input
               type="number"
               name="duration"
@@ -252,16 +266,6 @@ const EditTourForm = ({ tour, onClose, onSaved }) => {
               placeholder="Included (optional)"
             />
           </div>
-          {/* <div className="form-group">
-            <label>Photos:</label>
-            <input
-              type="file"
-              name="photos"
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-            />
-          </div> */}
           {error && <p className="error">{error}</p>}
           <div className="modal-buttons">
             <button type="submit" disabled={loading}>

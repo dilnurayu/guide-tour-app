@@ -13,7 +13,7 @@ const GuideToursView = ({ tours }) => {
             <div className="guide-tour-left">
               <h3>{tour.title}</h3>
               <p>
-                {tour.duration} Days | Languages: {tour.languageIds.join(", ")}
+                {tour.duration} Hours | Languages: {tour.languageIds.join(", ")}
               </p>
               <p>
                 Price: ${tour.price} {tour.priceType}

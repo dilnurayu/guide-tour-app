@@ -57,11 +57,23 @@ const TourDetailsView = ({
               </li>
               <li>
                 <p>Destinations</p>
-                <span>{tour.destinationIds.join(", ")}</span>
+                <span>
+                  {tour.addresses && tour.addresses.length > 0
+                    ? tour.addresses
+                        .map(
+                          (addr) => `${addr.region.region} - ${addr.city.city}`
+                        )
+                        .join(", ")
+                    : "N/A"}
+                </span>
               </li>
               <li>
                 <p>Languages</p>
-                <span>{tour.languageIds.join(", ")}</span>
+                <span>
+                  {tour.languages && tour.languages.length > 0
+                    ? tour.languages.map((lang) => lang.name).join(", ")
+                    : "N/A"}
+                </span>
               </li>
               <li>
                 <p>Price</p>
@@ -83,12 +95,20 @@ const TourDetailsView = ({
               value={bookingData.reserve_count}
               onChange={onBookingInputChange}
             />
-            <input
-              placeholder="Language"
+            <select
               name="language_id"
               value={bookingData.language_id}
               onChange={onBookingInputChange}
-            />
+            >
+              <option value="">Select a language</option>
+              {tour.languages &&
+                tour.languages.length > 0 &&
+                tour.languages.map((lang) => (
+                  <option key={lang.language_id} value={lang.language_id}>
+                    {lang.name}
+                  </option>
+                ))}
+            </select>
             <input
               placeholder="Message"
               name="message"

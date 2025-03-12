@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GuideToursListView from "../views/GuideToursListView";
 import CreateTourForm from "../views/CreateTourForm";
 import EditTourForm from "../views/EditTourForm";
@@ -12,6 +12,20 @@ const GuideToursListContainer = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [tourToEdit, setTourToEdit] = useState(null);
   const [tourToDelete, setTourToDelete] = useState(null);
+
+  const [addressOptions, setAddressOptions] = useState([]);
+  const [languageOptions, setLanguageOptions] = useState([]);
+
+  useEffect(() => {
+    fetch("https://guide-tour-api.vercel.app/languages")
+      .then((res) => res.json())
+      .then((data) => setLanguageOptions(data))
+      .catch((err) => console.error("Error fetching languages:", err));
+    fetch("https://guide-tour-api.vercel.app/addresses")
+      .then((res) => res.json())
+      .then((data) => setAddressOptions(data))
+      .catch((err) => console.error("Error fetching addresses:", err));
+  }, []);
 
   const handleTourCreated = () => {
     setIsCreateModalOpen(false);
@@ -55,6 +69,8 @@ const GuideToursListContainer = () => {
         <CreateTourForm
           onClose={() => setIsCreateModalOpen(false)}
           onCreated={handleTourCreated}
+          languageOptions={languageOptions}
+          destinationOptions={addressOptions}
         />
       )}
       {tourToEdit && (
@@ -62,6 +78,8 @@ const GuideToursListContainer = () => {
           tour={tourToEdit}
           onClose={() => setTourToEdit(null)}
           onSaved={handleTourUpdated}
+          languageOptions={languageOptions}
+          destinationOptions={addressOptions}
         />
       )}
       {tourToDelete && (

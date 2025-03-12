@@ -109,6 +109,11 @@ h5 {
   border: none;
   border-radius: 10px;
 }
+.book-tour-wrapper select {
+  border-radius: 10px;
+  border: none;
+  padding: 15px 10px;
+}
 
 .book-tour-wrapper button {
   margin: 20px auto 0 auto;
