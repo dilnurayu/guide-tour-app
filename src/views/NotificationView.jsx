@@ -36,7 +36,7 @@ const NotificationView = ({
                 <div className="notification-wrapper">
                   <img src={guidePerson} alt="ProfilePic" />
                   <div className="notification-details">
-                    <h3>{booking.guide_name || "Tourists Name"}</h3>
+                    <h3>{booking.tourist_name || "Tourists Name"}</h3>
                     <p className="notification-message">
                       Language: {booking.language_id} | Reserve Count:{" "}
                       {booking.reserve_count} | Date: {booking.tour_date}
@@ -45,9 +45,14 @@ const NotificationView = ({
                   </div>
                 </div>
                 {booking.confirmed ? (
-                  <button disabled>Confirmed</button>
+                  <button disabled className="confirmed">
+                    Confirmed
+                  </button>
                 ) : (
-                  <button onClick={() => onConfirm(booking.book_id, "guide")}>
+                  <button
+                    onClick={() => onConfirm(booking.book_id, "guide")}
+                    className="confirm"
+                  >
                     Confirm
                   </button>
                 )}
@@ -75,9 +80,14 @@ const NotificationView = ({
                   </div>
                 </div>
                 {booking.confirmed ? (
-                  <button disabled>Confirmed</button>
+                  <button disabled className="confirmed">
+                    Confirmed
+                  </button>
                 ) : (
-                  <button onClick={() => onConfirm(booking.book_id, "tour")}>
+                  <button
+                    onClick={() => onConfirm(booking.book_id, "tour")}
+                    className="confirm"
+                  >
                     Confirm
                   </button>
                 )}

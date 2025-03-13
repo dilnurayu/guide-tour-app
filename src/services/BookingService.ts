@@ -14,12 +14,21 @@ const getAuthHeaders = () => {
 
 export const BookingService = {
   bookGuide: async (data: BookingGuide) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not registered or logged in yet");
+      throw new Error("Not authenticated");
+    }
+
     const response = await fetch(`${API_BASE_URL}/bookings/guides`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) {
+      if (response.status === 401) {
+        alert("You are not registered or logged in yet");
+      }
       const errorData = await response.json();
       throw new Error(errorData.message || "Booking failed");
     }
@@ -29,12 +38,21 @@ export const BookingService = {
 
 export const tourBookingService = {
   bookTour: async (data: BookingTour) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not registered or logged in yet");
+      throw new Error("Not authenticated");
+    }
+
     const response = await fetch(`${API_BASE_URL}/bookings/tours`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) {
+      if (response.status === 401) {
+        alert("You are not registered or logged in yet");
+      }
       const errorData = await response.json();
       throw new Error(errorData.message || "Booking failed");
     }

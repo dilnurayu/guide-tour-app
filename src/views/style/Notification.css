@@ -38,11 +38,15 @@
   border-radius: 10px;
   height: min-content;
   margin: auto 0;
-  background-color: rgba(220, 125, 31, 1);
   color: white;
   cursor: pointer;
 }
-
+.confirm {
+  background-color: rgba(220, 125, 31, 1);
+}
+.confirmed {
+  background-color: rgb(102, 153, 102);
+}
 .notification-confirmed {
   color: green;
 }

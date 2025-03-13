@@ -35,7 +35,7 @@ export async function fetchGuideResumeReviews(): Promise<GuideReview[]> {
   return data.map(mapGuideReview);
 }
 
-// New functions to post reviews:
+// post reviews:
 
 export async function postGuideReview(review: {
   resume_id: number;
@@ -44,6 +44,11 @@ export async function postGuideReview(review: {
   rating: number;
 }): Promise<GuideReview> {
   const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You are not registered or logged in yet");
+    throw new Error("Not authenticated");
+  }
+
   const response = await fetch(
     "https://guide-tour-api.vercel.app/reviews/resume",
     {
@@ -56,10 +61,15 @@ export async function postGuideReview(review: {
       body: JSON.stringify(review),
     }
   );
+
   if (!response.ok) {
+    if (response.status === 401) {
+      alert("You are not registered or logged in yet");
+    }
     const errorData = await response.json();
     throw new Error(errorData.message || "Failed to post guide review");
   }
+
   const data = await response.json();
   return mapGuideReview(data);
 }
@@ -71,6 +81,11 @@ export async function postTourReview(review: {
   rating: number;
 }): Promise<TourReview> {
   const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You are not registered or logged in yet");
+    throw new Error("Not authenticated");
+  }
+
   const response = await fetch(
     "https://guide-tour-api.vercel.app/reviews/tour",
     {
@@ -83,10 +98,15 @@ export async function postTourReview(review: {
       body: JSON.stringify(review),
     }
   );
+
   if (!response.ok) {
+    if (response.status === 401) {
+      alert("You are not registered or logged in yet");
+    }
     const errorData = await response.json();
     throw new Error(errorData.message || "Failed to post tour review");
   }
+
   const data = await response.json();
   return mapTourReview(data);
 }
