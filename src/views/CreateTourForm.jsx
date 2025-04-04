@@ -12,8 +12,8 @@ const CreateTourForm = ({
     title: "",
     about: "",
     guestCount: "",
-    languageIds: [], // initially an array
-    destinationIds: [], // initially an array
+    languageIds: [],
+    destinationIds: [],
     date: "",
     duration: "",
     priceType: "per person",
@@ -25,7 +25,6 @@ const CreateTourForm = ({
     notIncluded: "",
     included: "",
   });
-
   const [photos, setPhotos] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,7 +32,6 @@ const CreateTourForm = ({
   const handleChange = (e) => {
     const { name, value, multiple, options } = e.target;
     if (multiple) {
-      // If this is a multi-select, convert selected options to an array of values.
       const selectedValues = Array.from(options)
         .filter((option) => option.selected)
         .map((option) => option.value);
@@ -50,16 +48,29 @@ const CreateTourForm = ({
   };
 
   const handleFileChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setPhotos(Array.from(e.target.files));
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      if (files.length !== 3) {
+        setError("Please upload exactly 3 images.");
+        setPhotos([]); // Clear any previous selection
+      } else {
+        setError("");
+        setPhotos(files);
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
+    // Validate photos count before submission
+    if (photos.length !== 3) {
+      setError("Please upload exactly 3 images.");
+      return;
+    }
+
+    setLoading(true);
     const tourData = {
       title: formData.title,
       guest_count: Number(formData.guestCount),
@@ -77,10 +88,8 @@ const CreateTourForm = ({
       destination_ids: formData.destinationIds.map((id) => Number(id)),
       language_ids: formData.languageIds.map((id) => Number(id)),
     };
-
     const requestData = new FormData();
     requestData.append("tour_data", JSON.stringify(tourData));
-
     photos.forEach((photo) => {
       requestData.append("photos", photo, photo.name);
     });
@@ -99,7 +108,6 @@ const CreateTourForm = ({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <h2>Create a New Tour</h2>
-
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Title:</label>
@@ -123,7 +131,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Guest Count:</label>
             <input
@@ -135,7 +142,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Language:</label>
             <select
@@ -153,7 +159,6 @@ const CreateTourForm = ({
                 ))}
             </select>
           </div>
-
           <div className="form-group">
             <label>Destination:</label>
             <select
@@ -171,7 +176,6 @@ const CreateTourForm = ({
                 ))}
             </select>
           </div>
-
           <div className="form-group">
             <label>Date:</label>
             <input
@@ -182,7 +186,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Duration (hours):</label>
             <input
@@ -194,7 +197,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Price Type:</label>
             <select
@@ -207,7 +209,6 @@ const CreateTourForm = ({
               <option value="per group">Per Group</option>
             </select>
           </div>
-
           <div className="form-group">
             <label>Price ($):</label>
             <input
@@ -219,7 +220,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Payment Type:</label>
             <select
@@ -232,7 +232,6 @@ const CreateTourForm = ({
               <option value="cash">Cash</option>
             </select>
           </div>
-
           <div className="form-group">
             <label>Departure Time:</label>
             <input
@@ -243,7 +242,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Return Time:</label>
             <input
@@ -254,7 +252,6 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           <div className="form-group">
             <label>Dress Code:</label>
             <input
@@ -265,7 +262,6 @@ const CreateTourForm = ({
               placeholder="Dress Code (optional)"
             />
           </div>
-
           <div className="form-group">
             <label>Not Included:</label>
             <input
@@ -276,7 +272,6 @@ const CreateTourForm = ({
               placeholder="Not Included (optional)"
             />
           </div>
-
           <div className="form-group">
             <label>Included:</label>
             <input
@@ -287,7 +282,6 @@ const CreateTourForm = ({
               placeholder="Included (optional)"
             />
           </div>
-
           <div className="form-group">
             <label>Photos:</label>
             <input
@@ -299,9 +293,7 @@ const CreateTourForm = ({
               required
             />
           </div>
-
           {error && <p className="error">{error}</p>}
-
           <div className="modal-buttons">
             <button type="submit" disabled={loading}>
               {loading ? "Submitting..." : "Submit"}
