@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import {
@@ -12,9 +12,9 @@ import {
   FiCalendar,
 } from "react-icons/fi";
 import logo from "../assets/UzGuide.png";
-import AuthForm from "../skeleton/AuthComponents";
 import "./style/Header.css";
 import { IoIosNotifications } from "react-icons/io";
+import AuthForm from "../components/AuthForm";
 
 const HeaderView = ({
   user,
