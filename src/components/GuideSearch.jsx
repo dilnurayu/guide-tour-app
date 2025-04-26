@@ -107,14 +107,17 @@ const GuideSearch = ({ filters, setFilters }) => {
             </div>
             <div className="filter-item">
               <p>Payment Type</p>
-              <input
-                type="text"
+              <select
                 name="payment"
-                placeholder="Hourly"
                 value={localFilters.payment}
                 onChange={handleChange}
                 className="payment-input"
-              />
+              >
+                <option value="">Select Payment Type</option>
+                <option value="hourly">Hourly</option>
+                <option value="daily">Daily</option>
+                <option value="fixed">Fixed</option>
+              </select>
             </div>
           </div>
           <button className="search-button" onClick={handleSearch}>

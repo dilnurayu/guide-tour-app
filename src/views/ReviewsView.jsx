@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style/GuideReviews.css";
 import image from "../assets/profile.png";
 
@@ -8,11 +8,22 @@ const ReviewsView = ({
   onReviewInputChange,
   onSubmitReview,
 }) => {
+  const [hoveredRating, setHoveredRating] = useState(0);
+
+  const handleStarClick = (rating) => {
+    const event = {
+      target: {
+        name: "rating",
+        value: rating,
+      },
+    };
+    onReviewInputChange(event);
+  };
+
   return (
     <div className="guide-reviews">
       <div className="line"></div>
       <h3>Reviews ({reviews.length})</h3>
-
       <div className="review-form">
         <textarea
           name="description"
@@ -23,19 +34,30 @@ const ReviewsView = ({
         <div className="rate-comment">
           <div className="rate">
             <p>Rate:</p>
-            <input
-              type="number"
-              name="rating"
-              min="0"
-              max="5"
-              value={reviewForm.rating}
-              onChange={onReviewInputChange}
-            />
+            <div className="star-rating">
+              {[...Array(5)].map((_, index) => {
+                const ratingValue = index + 1;
+                return (
+                  <span
+                    key={index}
+                    className={`star-input ${
+                      ratingValue <= (hoveredRating || reviewForm.rating)
+                        ? "filled"
+                        : "empty"
+                    }`}
+                    onClick={() => handleStarClick(ratingValue)}
+                    onMouseEnter={() => setHoveredRating(ratingValue)}
+                    onMouseLeave={() => setHoveredRating(0)}
+                  >
+                    ★
+                  </span>
+                );
+              })}
+            </div>
           </div>
           <button onClick={onSubmitReview}>Comment</button>
         </div>
       </div>
-
       {/* Reviews List */}
       <div className="reviews-list">
         {reviews.length > 0 ? (
