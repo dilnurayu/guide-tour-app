@@ -66,7 +66,7 @@ const GuidesListView = ({ guides, loading, error, onApplyFilters }) => {
           >
             <li className="guide-item">
               <img
-                src={guide.photo ? guide.photo : guidePerson}
+                src={guide.guidePhoto ? guide.guidePhoto : guidePerson}
                 alt={guide.guideName}
               />
               <div className="rating">{renderStars(guide.rating)}</div>

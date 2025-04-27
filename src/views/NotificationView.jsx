@@ -34,7 +34,14 @@ const NotificationView = ({
             guideBookings.map((booking) => (
               <div className="notification-container" key={booking.book_id}>
                 <div className="notification-wrapper">
-                  <img src={guidePerson} alt="ProfilePic" />
+                  <img
+                    src={
+                      booking.tourist_photo
+                        ? booking.tourist_photo
+                        : guidePerson
+                    }
+                    alt="ProfilePic"
+                  />
                   <div className="notification-details">
                     <h3>{booking.tourist_name || "Tourists Name"}</h3>
                     <p className="notification-message">
@@ -69,7 +76,14 @@ const NotificationView = ({
             tourBookings.map((booking) => (
               <div className="notification-container" key={booking.book_id}>
                 <div className="notification-wrapper">
-                  <img src={guidePerson} alt="ProfilePic" />
+                  <img
+                    src={
+                      booking.tourist_photo
+                        ? booking.tourist_photo
+                        : guidePerson
+                    }
+                    alt="ProfilePic"
+                  />
                   <div className="notification-details">
                     <h3>{booking.tour_title || "Tour Name"}</h3>
                     <p className="notification-message">
@@ -109,7 +123,12 @@ const NotificationView = ({
             guideBookings.map((booking) => (
               <div className="notification-container" key={booking.book_id}>
                 <div className="notification-wrapper">
-                  <img src={guidePerson} alt="ProfilePic" />
+                  <img
+                    src={
+                      booking.guide_photo ? booking.guide_photo : guidePerson
+                    }
+                    alt="ProfilePic"
+                  />
                   <div className="notification-details">
                     <h3>{booking.guide_name || "Guide's Name"}</h3>
                     <p className="notification-message">
@@ -141,7 +160,12 @@ const NotificationView = ({
             tourBookings.map((booking) => (
               <div className="notification-container" key={booking.book_id}>
                 <div className="notification-wrapper">
-                  <img src={guidePerson} alt="ProfilePic" />
+                  <img
+                    src={
+                      booking.guide_photo ? booking.guide_photo : guidePerson
+                    }
+                    alt="ProfilePic"
+                  />
                   <div className="notification-details">
                     <h3>{booking.tour_title || "Tour Title"}</h3>
                     <p className="notification-message">

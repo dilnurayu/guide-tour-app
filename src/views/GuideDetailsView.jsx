@@ -93,7 +93,11 @@ const GuideDetailsView = ({
         </div>
         <div className="right-section">
           <div className="right-section-wrapper">
-            <img src={guidePerson} alt="Profile" className="profile-picture" />
+            <img
+              src={guide.guidePhoto ? guide.guidePhoto : guidePerson}
+              alt="Profile"
+              className="profile-picture"
+            />
             <h2 className="profile-name">{guide.guideName}</h2>
             <div className="rating">
               {[...Array(5)].map((_, i) => (

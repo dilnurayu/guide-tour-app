@@ -25,7 +25,10 @@ const ProfileView = ({
       <div className="profile-content">
         <div className="profile-image">
           <div className="profile-image-wrapper">
-            <img src={guidePerson} alt="Profile" />
+            <img
+              src={profileData ? profileData.profile_photo : guidePerson}
+              alt="Profile"
+            />
             <button className="logout" onClick={logout}>
               Logout
             </button>

@@ -7,6 +7,7 @@ export interface TouristGuideBooking {
   book_id: number;
   confirmed: boolean;
   guide_name: string;
+  guide_photo: string;
 }
 
 export interface TouristTourBooking {
@@ -17,6 +18,7 @@ export interface TouristTourBooking {
   book_id: number;
   confirmed: boolean;
   tour_title: string;
+  guide_photo: string;
 }
 
 export interface GuideGuideBooking {
@@ -27,6 +29,7 @@ export interface GuideGuideBooking {
   message: string;
   book_id: number;
   confirmed: boolean;
+  guide_photo: string;
 }
 
 export interface GuideTourBooking {
@@ -36,4 +39,5 @@ export interface GuideTourBooking {
   message: string;
   book_id: number;
   confirmed: boolean;
+  guide_photo: string;
 }

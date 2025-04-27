@@ -51,8 +51,17 @@ const AuthForm = ({
     onSubmit(e);
   };
 
+  const handleFileChange = (e) => {
+    onChange({
+      target: {
+        name: e.target.name,
+        value: e.target.files[0] || null,
+      },
+    });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       {!isLogin && (
         <>
           <FormInput
@@ -63,6 +72,7 @@ const AuthForm = ({
             placeholder="Full Name"
           />
           {errors.name && <span className="error">{errors.name}</span>}
+
           <select
             name="address_id"
             value={formData.address_id}
@@ -79,8 +89,20 @@ const AuthForm = ({
           {errors.address_id && (
             <span className="error">{errors.address_id}</span>
           )}
+
+          <div className="form-input-file">
+            <label htmlFor="profile_photo">Profile Photo:</label>
+            <input
+              type="file"
+              id="profile_photo"
+              name="profile_photo"
+              onChange={handleFileChange}
+              accept="image/*"
+            />
+          </div>
         </>
       )}
+
       <FormInput
         type="email"
         name="email"
@@ -89,6 +111,7 @@ const AuthForm = ({
         placeholder="Email"
       />
       {errors.email && <span className="error">{errors.email}</span>}
+
       <FormInput
         type="password"
         name="password"
@@ -97,6 +120,7 @@ const AuthForm = ({
         placeholder="Password"
       />
       {errors.password && <span className="error">{errors.password}</span>}
+
       {!isLogin && (
         <UserTypeSelect
           value={formData.user_type}
@@ -104,6 +128,7 @@ const AuthForm = ({
           error={errors.user_type}
         />
       )}
+
       <button type="submit" disabled={loading}>
         {loading
           ? `Signing ${isLogin ? "in" : "up"}...`

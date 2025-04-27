@@ -9,13 +9,11 @@ import { INITIAL_FORM_STATE } from "../models/authModel";
 const HeaderContainer = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-
   const [activeModal, setActiveModal] = useState(null);
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const [addressOptions, setAddressOptions] = useState([]);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ const HeaderContainer = () => {
     try {
       const { email, password } = formData;
       const data = await authService.login({ email, password });
-
       localStorage.setItem("token", data.access_token);
       const token = localStorage.getItem("token");
       if (token) {
@@ -52,7 +49,6 @@ const HeaderContainer = () => {
           role: decodedToken ? decodedToken.role : null,
         });
       }
-
       closeModal();
       navigate("/profile");
     } catch (err) {
@@ -68,14 +64,12 @@ const HeaderContainer = () => {
     setLoading(true);
     try {
       const data = await authService.register(formData);
-
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("userType", formData.user_type);
       setUser({
         role: formData.user_type,
         token: data.access_token,
       });
-
       closeModal();
       navigate("/profile");
     } catch (err) {
