@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./GuideSearch.css";
-import guideListHeader from "../assets/guide-list-header.jpg";
+import guideListHeader from "../assets/guide-background.png";
 import perfectGuideImg from "../assets/perfect-guide.png";
 
 const GuideSearch = ({ filters, setFilters }) => {
