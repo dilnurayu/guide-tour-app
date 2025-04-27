@@ -17,22 +17,57 @@ const NotificationContainer = () => {
     setError("");
     try {
       if (userType === "tourist") {
-        const [guideData, tourData] = await Promise.all([
-          NotificationService.getTouristGuideBookings(),
-          NotificationService.getTouristTourBookings(),
+        const guidePromise = NotificationService.getTouristGuideBookings();
+        const tourPromise = NotificationService.getTouristTourBookings();
+
+        const [guideData, tourData] = await Promise.allSettled([
+          guidePromise,
+          tourPromise,
         ]);
-        setGuideBookings(guideData);
-        setTourBookings(tourData);
+
+        if (guideData.status === "fulfilled") {
+          setGuideBookings(guideData.value);
+        } else {
+          console.error("Failed to fetch guide bookings:", guideData.reason);
+        }
+
+        if (tourData.status === "fulfilled") {
+          setTourBookings(tourData.value);
+        } else {
+          console.error("Failed to fetch tour bookings:", tourData.reason);
+        }
+
+        if (guideData.status === "rejected" && tourData.status === "rejected") {
+          setError("Both notifications failed to load.");
+        }
       } else if (userType === "guide") {
-        const [guideData, tourData] = await Promise.all([
-          NotificationService.getGuideGuideBookings(),
-          NotificationService.getGuideTourBookings(),
+        const guidePromise = NotificationService.getGuideGuideBookings();
+        const tourPromise = NotificationService.getGuideTourBookings();
+
+        const [guideData, tourData] = await Promise.allSettled([
+          guidePromise,
+          tourPromise,
         ]);
-        setGuideBookings(guideData);
-        setTourBookings(tourData);
+
+        if (guideData.status === "fulfilled") {
+          setGuideBookings(guideData.value);
+        } else {
+          console.error("Failed to fetch guide bookings:", guideData.reason);
+        }
+
+        if (tourData.status === "fulfilled") {
+          setTourBookings(tourData.value);
+        } else {
+          console.error("Failed to fetch tour bookings:", tourData.reason);
+        }
+
+        if (guideData.status === "rejected" && tourData.status === "rejected") {
+          setError("Both notifications failed to load.");
+        }
       }
     } catch (err) {
-      setError(err.message);
+      console.error("Unexpected error:", err);
+      setError("Unexpected error occurred.");
     } finally {
       setLoading(false);
     }
