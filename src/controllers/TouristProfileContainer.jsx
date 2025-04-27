@@ -1,25 +1,28 @@
 import { useContext } from "react";
-import guidePerson from "../assets/profile.png";
 import { AuthContext } from "../auth/AuthContext";
 import "../views/style/Profile.css";
+import TouristProfileView from "../views/TouristProfileView";
+import { useFetch } from "../hooks/useFetch";
+import { getTouristProfile } from "../services/ProfileService";
+
 const TouristProfileContainer = () => {
   const { logout } = useContext(AuthContext);
+  const {
+    data: profileData,
+    loading,
+    error,
+    refetch,
+  } = useFetch(getTouristProfile);
+
   return (
-    <>
-      <div className="profile">
-        <h1>Profile</h1>
-        <div className="profile-content">
-          <div className="profile-image">
-            <div className="profile-image-wrapper">
-              <img src={guidePerson} alt="Profile" />
-              <button className="logout" onClick={logout}>
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <TouristProfileView
+      logout={logout}
+      profileData={profileData}
+      loading={loading}
+      error={error}
+      refetch={refetch}
+    />
   );
 };
+
 export default TouristProfileContainer;

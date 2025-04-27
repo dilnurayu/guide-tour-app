@@ -18,3 +18,24 @@ export async function getProfile() {
   }
   return response.json();
 }
+
+export async function getTouristProfile() {
+  const token = localStorage.getItem("token");
+  const response = await fetch(
+    "https://guide-tour-api.vercel.app/profile/tourist",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `Error fetching profile: ${response.status} - ${errorText}`
+    );
+  }
+  return response.json();
+}
